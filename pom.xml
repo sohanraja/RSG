@@ -1,0 +1,86 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>RSG_DRE</groupId>
+  <artifactId>RSG_DRE</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Ford</name>
+  <url>http://maven.apache.org</url>
+   <dependencies>
+    	<dependency>
+			   <groupId>org.seleniumhq.selenium</groupId>
+			   <artifactId>selenium-server</artifactId>
+			   <version>2.53.0</version>
+  		</dependency>
+  		
+  		<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-ie-driver</artifactId>
+    <version>3.4.0</version>
+</dependency>
+  		<dependency>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-chrome-driver</artifactId>
+    <version>2.53.0</version>
+</dependency>
+  		
+  		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.15</version>
+		</dependency>
+			<dependency>
+			    <groupId>org.testng</groupId>
+			    <artifactId>testng</artifactId>
+			    <version>6.9.9</version>
+    			<scope>test</scope>
+    	</dependency>
+    	<dependency> 
+ 			      <groupId>com.vedio</groupId>
+			    <artifactId>MonteScreenRecorder</artifactId>
+			    <version>2.0</version>  
+			    			    <scope>system</scope>
+   				<systemPath>${project.basedir}/libs/Mercury.jar</systemPath>   			      			 
+     	</dependency> 
+		<dependency>
+			    <groupId>com.vedio</groupId>
+			    <artifactId>ciberautomationframework</artifactId>
+			    <version>2.0</version>    
+			    			    <scope>system</scope>
+   				<systemPath>${project.basedir}/libs/MonteScreenRecorder.jar</systemPath>   			 			
+    	</dependency>
+    <dependency>
+    <groupId>com.relevantcodes</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>2.40.2</version>
+</dependency>
+
+     </dependencies>
+     
+     <build>
+	  <plugins>
+	  	  <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+	                <configuration>
+	                    <source>1.7</source>
+	                    <target>1.7</target>
+	                </configuration> 
+           </plugin>        
+           
+		   <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.14.1</version>
+	                <configuration>
+	                <outputDirectory>${basedir}/target/reports</outputDirectory>
+	                    <testFailureIgnore> true </testFailureIgnore>
+	                    <suiteXmlFiles>
+	                        <suiteXmlFile>testng2.xml</suiteXmlFile>
+
+	                    </suiteXmlFiles>
+	                </configuration> 
+           </plugin>
+	  </plugins>
+ </build>
+</project>
