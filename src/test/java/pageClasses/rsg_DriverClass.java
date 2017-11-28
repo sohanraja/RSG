@@ -55,7 +55,7 @@ public class rsg_DriverClass extends FuncitonLibrary {
 		{
 			applicationname="CTPQA";
 			   
-			   File dir = new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp());
+			   File dir = new File(System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+libs.datestamp());
 				dir.mkdirs();
 		}else if(this.getClass().getName().contains("RSGINT"))
 		{
