@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 import libraryClasses.FuncitonLibrary;
-import libraryClasses.ScriptVideoRecord;
+//import libraryClasses.ScriptVideoRecord;
 import pageClasses.*;
 import utilityClasses.ExcelUtilityClass;
 import utilityClasses.ScreenShot;
@@ -25,8 +25,8 @@ public class RSGDEVTC1 extends rsg_DriverClass{
 	{
 		int dtaRwCnt = data.getRowCount(1);
 		actions = new Actions(driver);
-		ScriptVideoRecord scriptVideoRecord=ScriptVideoRecord.getInstance();
-		scriptVideoRecord.startRecording(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp(), this.getClass().getName());
+//		ScriptVideoRecord scriptVideoRecord=ScriptVideoRecord.getInstance();
+//		scriptVideoRecord.startRecording(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp(), this.getClass().getName());
 		System.out.println("row count : "+dtaRwCnt);
 //		String scrnshtPth = data.getStrExcelData(1, 5, 2);
 		scrnshtPth = System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\Screenshots\\";
@@ -105,7 +105,7 @@ public class RSGDEVTC1 extends rsg_DriverClass{
 //				dRw=dtaRwCnt+1;
 //			}
 		}
-		scriptVideoRecord.stopRecording();
+//		scriptVideoRecord.stopRecording();
 //		tearReport();
 //		testSenariostearsReport();
 	}
