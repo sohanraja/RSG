@@ -33,21 +33,7 @@
 			    <artifactId>testng</artifactId>
 			    <version>6.9.9</version>
     			<scope>test</scope>
-    	</dependency>
-    	<dependency> 
- 			      <groupId>com.vedio</groupId>
-			    <artifactId>MonteScreenRecorder</artifactId>
-			    <version>2.0</version>  
-			    			    <scope>system</scope>
-   				<systemPath>${project.basedir}/libs/Mercury.jar</systemPath>   			      			 
-     	</dependency> 
-		<dependency>
-			    <groupId>com.vedio</groupId>
-			    <artifactId>ciberautomationframework</artifactId>
-			    <version>2.0</version>    
-			    			    <scope>system</scope>
-   				<systemPath>${project.basedir}/libs/MonteScreenRecorder.jar</systemPath>   			 			
-    	</dependency>
+    	</dependency>  	
     <dependency>
     <groupId>com.relevantcodes</groupId>
     <artifactId>extentreports</artifactId>
