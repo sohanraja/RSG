@@ -49,7 +49,7 @@ public class rsg_DriverClass extends FuncitonLibrary {
 		if(this.getClass().getName().contains("RSGQA")) {
 			applicationname="RSGQA";
 		   
-		   File dir = new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp());
+		   File dir = new File(System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+libs.datestamp());
 			dir.mkdirs();
 		}else if(this.getClass().getName().contains("CTPQA"))
 		{
@@ -61,19 +61,19 @@ public class rsg_DriverClass extends FuncitonLibrary {
 		{
 			applicationname="RSGINT";
 			   
-			   File dir = new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp());
+			   File dir = new File(System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+libs.datestamp());
 				dir.mkdirs();
 		}else if(this.getClass().getName().contains("CTPINT"))
 		{
 			applicationname="CTPINT";
 			   
-			   File dir = new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp());
+			   File dir = new File(System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+libs.datestamp());
 				dir.mkdirs();
 		}else
 		{
 			applicationname="RSGDEV";
 			   
-			   File dir = new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp());
+			   File dir = new File(System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+libs.datestamp());
 				dir.mkdirs();
 		}
 	
@@ -82,10 +82,10 @@ public class rsg_DriverClass extends FuncitonLibrary {
 		try {
 		
 
-			File file = new File(System.getProperty("user.dir")+"\\TestData"+applicationname+".xlsx");
+			File file = new File(System.getProperty("user.dir")+"//TestData"+applicationname+".xlsx");
 			System.out.println("user dir : "+file);
 			FileInputStream fis = new FileInputStream(file);
-			File fileToDelete= new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp()+"\\TestData"+applicationname+".xlsx");
+			File fileToDelete= new File(System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+libs.datestamp()+"//TestData"+applicationname+".xlsx");
 			
 			if(fileToDelete.delete()){
 
@@ -112,16 +112,16 @@ public class rsg_DriverClass extends FuncitonLibrary {
 		switch (browser_val) 
 		{
 		case "ie":
-			String ie_srvr_path = "C:\\Users\\SSubra68\\workspace\\RSG\\RSG_DRE\\libs\\Browserdrivers\\IEDriverServer.exe";
+			String ie_srvr_path = "C://Users//SSubra68//workspace//RSG//RSG_DRE//libs//Browserdrivers//IEDriverServer.exe";
 			System.setProperty("webdriver.ie.driver", ie_srvr_path);
 
 			System.out.println("one");
 
 			break;
 		case "firefox":
-			File pathToBinary = new File("C:\\Program Files\\Mozilla Firefox\\firefox.exe");
+			File pathToBinary = new File("C://Program Files//Mozilla Firefox//firefox.exe");
 			FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-			System.setProperty("webdriver.gecko.driver", "C:\\Users\\SSubra68\\Downloads\\browserDrivers\\geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", "C://Users//SSubra68//Downloads//browserDrivers//geckodriver.exe");
 			 FirefoxProfile myProfile = new FirefoxProfile();
 
 			System.out.println("two");
@@ -130,7 +130,7 @@ public class rsg_DriverClass extends FuncitonLibrary {
 		case "chrome":
 			String path = System.getProperty("user.dir");
 			System.out.println(path);
-			String  chrome_srvr_path = System.getProperty("user.dir")+"\\libs\\Browserdrivers\\chromedriver.exe";
+			String  chrome_srvr_path = System.getProperty("user.dir")+"//libs//Browserdrivers//chromedriver.exe";
 			System.setProperty("webdriver.chrome.driver", chrome_srvr_path);
 			ChromeOptions options = new ChromeOptions();
 
