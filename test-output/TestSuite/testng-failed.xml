@@ -3,18 +3,17 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [TestSuite]">
   <test name="Test(failed)">
     <classes>
-      <class name="runClasses.CTPQATC1">
+      <class name="runClasses.RSGINTTC5">
         <methods>
-          <include name="closeDriver"/>
-          <include name="getDriver"/>
-        </methods>
-      </class> <!-- runClasses.CTPQATC1 -->
-      <class name="runClasses.CTPINTTC1">
-        <methods>
-          <include name="getDriver"/>
           <include name="landing_Page"/>
         </methods>
-      </class> <!-- runClasses.CTPINTTC1 -->
+      </class> <!-- runClasses.RSGINTTC5 -->
+      <class name="runClasses.RSGINTTC2">
+        <methods>
+          <include name="landing_Page"/>
+          <include name="getDriver"/>
+        </methods>
+      </class> <!-- runClasses.RSGINTTC2 -->
     </classes>
   </test> <!-- Test(failed) -->
 </suite> <!-- Failed suite [TestSuite] -->
