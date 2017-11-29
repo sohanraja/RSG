@@ -148,7 +148,7 @@ public class rsg_DriverClass extends FuncitonLibrary {
 		case "chrome":
 			String path = System.getProperty("user.dir");
 			System.out.println(path);
-			String  chrome_srvr_path = System.getProperty("user.dir")+"/libs/Browserdrivers/chromedriver";
+			String  chrome_srvr_path = System.getProperty("user.dir")+"/chromedriver";
 			System.setProperty("webdriver.chrome.driver", chrome_srvr_path);
 			ChromeOptions options = new ChromeOptions();
 //			options.addArguments("--disable-extensions");
