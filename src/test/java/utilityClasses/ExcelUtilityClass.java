@@ -24,7 +24,7 @@ import libraryClasses.FuncitonLibrary;
 public class ExcelUtilityClass extends FuncitonLibrary {
 			
 	public int gtRwCnt(int sheetNum) throws IOException{
-		File file =  new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
+		File file =  new File(System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/TestData"+applicationname+".xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 		XSSFSheet ws1 = wb1.getSheetAt(sheetNum);
@@ -38,7 +38,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 	public String getStrExcelData(int RowNum,int ColNum,int sheetNum) throws IOException{
 		try{ 
 			
-		File file = new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
+		File file = new File(System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/TestData"+applicationname+".xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 		XSSFSheet ws1 = wb1.getSheetAt(sheetNum);
@@ -57,7 +57,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 	public void writeToExcel(String val,int Row,int Col, int SheetNum) throws Exception 
     {
 		try{
-			File file =  new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
+			File file =  new File(System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/TestData"+applicationname+".xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 		XSSFSheet ws1 = wb1.getSheetAt(SheetNum);
@@ -78,7 +78,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 	public int getRowCount (int SheetNum) throws Exception 
     {
 		try{
-		File file = new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
+		File file = new File(System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/TestData"+applicationname+".xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 		XSSFSheet ws1 = wb1.getSheetAt(SheetNum);
@@ -97,7 +97,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 	public String getExcelData(int RowNum,String ColName,String sheetName) throws IOException{
 		try{ 
 			String CellData=null;
-		File file =  new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
+		File file =  new File(System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/TestData"+applicationname+".xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 		XSSFSheet ws1 = wb1.getSheet(sheetName.trim());
@@ -124,7 +124,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 		try{ 
 			String CellData=null;
 //			value=value.replaceAll("\\s+","");
-		File file =  new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
+		File file =  new File(System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/TestData"+applicationname+".xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 		XSSFSheet ws1 = wb1.getSheet(sheetName);
@@ -157,7 +157,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 public boolean addColumn(String colName,String sheetName){
 		
 		try{
-			File file =  new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
+			File file =  new File(System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/TestData"+applicationname+".xlsx");
 			FileInputStream fis = new FileInputStream(file);
 			XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 			XSSFSheet ws1 = wb1.getSheet(sheetName);

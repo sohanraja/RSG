@@ -11,7 +11,7 @@ public class ExtentReportManager {
 	
 	public static ExtentReports invokeExtentReport(){
 		FuncitonLibrary libs = new FuncitonLibrary();
-		String Path = System.getProperty("user.dir")+"\\Reports\\"+FuncitonLibrary.applicationname+"\\"+libs.datestamp()+"\\"+FuncitonLibrary.applicationname+"_TestReport_"+libs.datestamp()+".html";
+		String Path = System.getProperty("user.dir")+"/Reports/"+FuncitonLibrary.applicationname+"/"+libs.datestamp()+"/"+FuncitonLibrary.applicationname+"_TestReport_"+libs.datestamp()+".html";
 		System.out.println( "path html report : "+Path);
 	    report = new ExtentReports(Path, false);
 	    report
