@@ -26,24 +26,15 @@ public class PGO_PaymentCalculator
 	}
     public static WebElement paymentHeading(WebDriver driver)
 	{
-    	try {
 		WebDriverWait wait=new WebDriverWait(driver,5);
-    	WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@data-tabname='intro']//h2")));
-    	libs.HighlightElement(driver, element);	}catch(Exception e){
-    		System.out.println("return element;	");
-    	}
-    	return element;	
+    	WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@class='tab-content clearfix popover-container payment-estimate-intro']/div/div/div/h2")));
+    	libs.HighlightElement(driver, element);		return element;	
 	}
     public static WebElement paymentInline(WebDriver driver)
 	{
-		try {
-			WebDriverWait wait=new WebDriverWait(driver,400);
-    	WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@data-tabname='intro']//p[2]")));
-    	libs.HighlightElement(driver, element);	}catch(Exception e){
-    		System.out.println("paymentInline");
-    		
-    	}
-		return element;	
+		WebDriverWait wait=new WebDriverWait(driver,400);
+    	WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@class='tab-content clearfix popover-container payment-estimate-intro']/div/div/div//p[2]")));
+    	libs.HighlightElement(driver, element);		return element;	
 	}
     public static List<WebElement> paymentOptions(WebDriver driver)
 	{
@@ -51,242 +42,54 @@ public class PGO_PaymentCalculator
     	List<WebElement> elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//div[@class='row small-gutters']/div[@class='col-xs-12 col-md-4']")));
 		return elements;
 	}
-       
-    public static WebElement paymentInlinetext (WebDriver driver,String paymentoption)
+    public static WebElement paymentSkip(WebDriver driver)
 	{
-		try{
-			element =driver.findElement(By.xpath("//section[@data-tabname='"+paymentoption+"']//small[@class='disclaimer']//p"));
-		libs.HighlightElement(driver, element);	}catch(Exception e)
-		{
-			System.out.println("paymentInlinetext");
-		}
-		return element;	
+		WebDriverWait wait=new WebDriverWait(driver,5);
+    	WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row small-gutters']/div[@class='col-xs-12 col-md-4 col-md-push-4']")));
+    	libs.HighlightElement(driver, element);		return element;	
 	}
-    
-    
-    public static WebElement btn_paymenttype(WebDriver driver,String paymentoption)
-  	{
-  		try{
-  			WebDriverWait wait=new WebDriverWait(driver,5);
-  			WebElement element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//a[@href=''][text()='"+paymentoption+"'])[position()=2]")));
-  		libs.HighlightElement(driver, element);	}catch(Exception e)
-  		{
-  			System.out.println("btn_paymenttype");
-  		}
-  		return element;	
-  	}
-    
-    public static WebElement txt_Step1Heading(WebDriver driver,int i)
-   	{
-   		try{
-   			WebDriverWait wait=new WebDriverWait(driver,5);
-   			WebElement element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//table[@class='accounting']//th)[position()="+i+"]")));
-   		libs.HighlightElement(driver, element);	}catch(Exception e)
-   		{
-   			System.out.println("txt_Step1Heading");
-   		}
-   		return element;	
-   	}
-    
-    public static WebElement txt_Step2Heading(WebDriver driver)
-   	{
-   		try{
-   			element =driver.findElement(By.xpath("//div[@class='row split-deals']/div/h2"));
-   		libs.HighlightElement(driver, element);	}catch(Exception e)
-   		{
-   			System.out.println("txt_Step2Heading");
-   		}
-   		return element;	
-   	}
-    public static WebElement txt_leaseStep2Heading(WebDriver driver)
-   	{
-   		try{
-   			element =driver.findElement(By.xpath("(//div[@class='col-xs-12']//h2)[position()=3]"));
-   		libs.HighlightElement(driver, element);	}catch(Exception e)
-   		{
-   			System.out.println("txt_Step2Heading");
-   		}
-   		return element;	
-   	}
-    
-    public static WebElement error_Zipcode(WebDriver driver,String option)
-	{ try{
-	element = 	driver.findElement(By.xpath("//section[@data-tabname='"+option+"']//p[@data-ng-if='zipCodeError']"));
-	libs.HighlightElement(driver, element);
-	}catch(Exception e)		{ 		System.out.println("error_Zipcode"); 		}		return element;	}
-
-    
-    public static WebElement txt_Zipcode(WebDriver driver,String option)
+    public static WebElement paymentTab (WebDriver driver)
 	{
-    	try{
-	element = 	driver.findElement(By.xpath("//section[@data-tabname='"+option+"']//span//input"));
-	libs.HighlightElement(driver, element);	return element;
-	}catch(Exception e){
-		System.out.println("txt_Zipcode");
-		}
-		return element;	
-    	}
-    
-    public static WebElement txt_Incentive_Rate(WebDriver driver)
-   	{
-       	try{
-   	element = 	driver.findElement(By.xpath("(//div[@class='section-header'])[position()=1]"));
-   	libs.HighlightElement(driver, element);	return element;
-   	}catch(Exception e){
-   		System.out.println("txt_Zipcode");
-   		}
-   		return element;	
-       	}
-    public static WebElement txt_User_Rate(WebDriver driver)
-   	{
-       	try{
-   	element = 	driver.findElement(By.xpath("(//div[@class='section-header'])[position()=2]//label"));
-   	libs.HighlightElement(driver, element);	return element;
-   	}catch(Exception e){
-   		System.out.println("txt_Zipcode");
-   		}
-   		return element;	
-       	}
-    
-    
-    
-	public static WebElement txt_BottomText(WebDriver driver,int position)
-	{
-	  	try{
-	element = 	driver.findElement(By.xpath("(//p[@class='ng-binding'])[position()="+position+"]"));
-	libs.HighlightElement(driver, element);		}catch(Exception e){
-   		System.out.println("txt_BottomText");
-   		}
-   		return element;	
-	
+		WebDriverWait wait=new WebDriverWait(driver,5);
+		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='single-tab payment active']")));
+		libs.HighlightElement(driver, element);		return element;	
 	}
-    
-	public static WebElement txt_Bottom_Disclaimer(WebDriver driver)
+    public static WebElement paymentTabBuy(WebDriver driver)
 	{
-	  	try{
-	element = 	driver.findElement(By.xpath("(//small[@class='disclaimer'])[position()=2]"));
-	libs.HighlightElement(driver, element);		}catch(Exception e){
-   		System.out.println("txt_BottomText");
-   		}
-   		return element;	
-	
+		WebDriverWait wait=new WebDriverWait(driver,5);
+		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row small-gutters']/div[@class='col-xs-12 col-md-4']/a[contains(text(),'Buy')]")));
+		libs.HighlightElement(driver, element);		return element;	
 	}
-    
-	
-	
-	public static WebElement txt_Zip_Code(WebDriver driver,String Option)
+    public static WebElement paymentTabLease(WebDriver driver)
 	{
-	  	try{
-	element = 	driver.findElement(By.xpath("//section[@data-tabname='"+Option+"']//p[@class='col-xs-12 zipDetails']"));
-	libs.HighlightElement(driver, element);		}catch(Exception e){
-   		System.out.println("txt_Zip_Code");
-   		}
-   		return element;	
-	
+		WebDriverWait wait=new WebDriverWait(driver,5);
+		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row small-gutters']/div[@class='col-xs-12 col-md-4']/a[contains(text(),'Lease')]")));
+		libs.HighlightElement(driver, element);		return element;	
 	}
-	
-	 public static List<WebElement> duration(WebDriver driver)
-		{
-			try{elements =driver.findElements(By.xpath("//span[@class='duration ng-binding']"));
-					}catch(Exception e){
-	   		System.out.println("duration");
-	   		}
-	   		return elements;	
-		
-		}
-	
-	 public static List<WebElement> changeOwnRate(WebDriver driver)
-		{
-			try{elements =driver.findElements(By.xpath("//span[@data-ng-if='term.defaultRate']"));
-					}catch(Exception e){
-	   		System.out.println("changeOwnRate");
-	   		}
-	   		return elements;	
-		
-		}
-	 
-	 public static List<WebElement> avaliableIncentives(WebDriver driver)
-		{
-			try{elements =driver.findElements(By.xpath("//span[@class='cash-back ng-binding']"));
-					}catch(Exception e){
-	   		System.out.println("avaliableIncentives");
-	   		}
-	   		return elements;	
-		
-		}
-		
-		public static WebElement Enter_Own_Value(WebDriver driver)
-		{
-		  	try{
-		element = 	driver.findElement(By.xpath("//input[@class='percentage ng-pristine ng-valid']"));
-		libs.HighlightElement(driver, element);		}catch(Exception e){
-	   		System.out.println("Enter_Own_Value");
-	   		}
-	   		return element;	
-		
-		}
-    
-    
-    public static WebElement dreicon(WebDriver driver,int position)
+    public static WebElement paymentTabCash(WebDriver driver)
 	{
-		try
-		{WebDriverWait wait=new WebDriverWait(driver,200);
-		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[contains(@class,'dreicon icon-uni')])[position()="+position+"]")));
-		libs.HighlightElement(driver, element);		}catch(Exception e){
-	   		System.out.println("dreicon");
-	   		}
-	   		return element;	
+		WebDriverWait wait=new WebDriverWait(driver,5);
+		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='row small-gutters']/div[@class='col-xs-12 col-md-4']/a[contains(text(),'Cash')]")));
+		libs.HighlightElement(driver, element);		return element;	
 	}
-    
-    
-
-	 public static List<WebElement> paymentCalculation(WebDriver driver,String Paymenttype)
-		{
-			try{if(Paymenttype.equalsIgnoreCase("Finance"))
-			{
-				Paymenttype="buy";
-			}
-				elements =driver.findElements(By.xpath("//section[@data-tabname='"+Paymenttype+"']//div[@class='customPricingStackWrapper section']//tr"));
-					}catch(Exception e){
-	   		System.out.println("paymentCalculation");
-	   		}
-	   		return elements;	
-		
-		}
-	 
-	 
-	 public static List<WebElement> Estimated_Monthly_Payment(WebDriver driver,String Paymenttype)
-		{
-		 try{if(Paymenttype.equalsIgnoreCase("Finance"))
-			{
-				Paymenttype="buy";
-			}
-		 elements =driver.findElements(By.xpath("//div[@data-ng-show='estimates.retailIncentives']//div[@data-mode='"+Paymenttype+"']//span[@class='monthly-payment ng-binding']|//div[@data-mode='"+Paymenttype+"']//span[@class='monthly-payment ng-binding']"));
-					}catch(Exception e){
-	   		System.out.println("Estimated_Monthly_Payment");
-	   		}
-	   		return elements;	
-		
-		}
-    
-    
-	 public static WebElement Annual_Mileage (WebDriver driver)
-		{
-				try
-				{element = driver.findElement(By.xpath("//select[@data-ng-model='leaseMiles']"));
-		libs.HighlightElement(driver, element);}catch(Exception e){
-		
-		}
-				return element;
-		}
-    
-    
-    
-    
-    
-    
-    
-    
+    public static WebElement option(WebDriver driver)
+	{
+		WebDriverWait wait=new WebDriverWait(driver,5);
+		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//ul[@class='tab-list']/li[@class='active']")));
+		libs.HighlightElement(driver, element);		return element;	
+	}
+    public static WebElement paymentInlinetext (WebDriver driver)
+	{
+		WebDriverWait wait=new WebDriverWait(driver,5);
+		WebElement element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@data-tabname='buy']/div[@class='row ng-scope']/div[1]/small[@class='disclaimer']")));
+		libs.HighlightElement(driver, element);		return element;	
+	}
+    public static WebElement dreicon(WebDriver driver)
+	{
+		WebDriverWait wait=new WebDriverWait(driver,200);
+		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("(//span[@class='dreicon icon-uniE680'])[position()=2]")));
+		libs.HighlightElement(driver, element);		return element;	
+	}
     public static WebElement dreicon1(WebDriver driver)
 	{
 		WebDriverWait wait=new WebDriverWait(driver,200);
@@ -610,8 +413,35 @@ public static List<WebElement> priceElements(WebDriver driver,int dRw)
   List<WebElement> elements=driver.findElements(By.xpath("//section[@data-tabname='cash']/div[2]/table[@class='accounting']/tbody/tr/td[2]"));
  	return elements;
 }
-
-
+public static WebElement cashDreIcon1(WebDriver driver)
+{
+  WebDriverWait wait=new WebDriverWait(driver,5);
+  WebElement element=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@data-tabname='cash']/div/table[@class='accounting']/tbody/tr[4]/td[3]/span[@class='dreicon icon-uniE67E']")));
+ libs.HighlightElement(driver, element);		return element;	
+}
+public static WebElement cashpaymentInlinetext (WebDriver driver)
+{
+  WebDriverWait wait=new WebDriverWait(driver,5);
+  WebElement element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@data-tabname='cash']/div[1]/small")));
+ libs.HighlightElement(driver, element);		return element;	
+}
+public static WebElement cashavailableCentives(WebDriver driver)
+{
+  element =driver.findElement(By.xpath("//section[@data-tabname='cash']/div[2]/table[@class='accounting']/tbody/tr[8]"));
+ libs.HighlightElement(driver, element);		return element;	
+}
+public static WebElement cashpreestimatedTax(WebDriver driver)
+{
+   WebDriverWait wait=new WebDriverWait(driver,5);
+   WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@data-tabname='cash']/div[2]/table[@class='accounting']/tbody/tr[10]")));
+  libs.HighlightElement(driver, element);		return element;	
+}
+	public static WebElement cashDealerPrice(WebDriver driver)
+	{
+		WebDriverWait wait=new WebDriverWait(driver,5);
+		WebElement	element =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@data-tabname='cash']/div[2]/table[@class='accounting']/tbody/tr[7]")));
+	   libs.HighlightElement(driver, element);		return element;	
+	}
 	public static WebElement cashKellyBook(WebDriver driver)
 	{
 		WebDriverWait wait=new WebDriverWait(driver,5);
@@ -1019,16 +849,11 @@ public static List<WebElement> priceElements(WebDriver driver,int dRw)
 	
 	public static WebElement btn_next_Payment_continue (WebDriver driver)
 	{
-		try
-		{
-			element = driver.findElement(By.xpath("//a[contains(text(),'Next: Payment')]"));
-	        libs.HighlightElement(driver, element);
-		}
-		catch(Exception e)
-		{
-			System.out.println("btn_next_Payment_continue");
-		}
-		return element;
+			try{element = driver.findElement(By.xpath("//a[contains(text(),'Next: Payment')]"));
+	libs.HighlightElement(driver, element);}catch(Exception e){
+		System.out.println("btn_next_Payment_continue");
+	}
+			return element;
 	}
 	public static WebElement paymentTabs(WebDriver driver)
 	{
@@ -1127,236 +952,9 @@ public static List<WebElement> priceElements(WebDriver driver,int dRw)
 							
 
 	}
-	public static WebElement txt_downPaymentAlert (WebDriver driver)
-	{
-	try
-	{
-	 element = driver.findElement(By.xpath("(//div[@class='tradeInEstimatedNetCredit parbase section elementBase']//span)[position()=1]"));
-	 libs.HighlightElement(driver, element);
-	}
-	catch(Exception e)
-	{		
-	 System.out.println("txt_hightradeinAlert");
-	}
-	return element;
-	}
-	public static WebElement txt_downPaymentAlertTitle (WebDriver driver)
-	{
-	try
-	{
-	 element = driver.findElement(By.xpath("//div[@class='popover-title']/h3"));
-	 libs.HighlightElement(driver, element);
-	}
-	catch(Exception e)
-	{		
-	 System.out.println("txt_downPaymentAlertTitle");
-	}
-	return element;
-	}
-	public static WebElement txt_downPaymentAlertText (WebDriver driver)
-	{
-	try
-	{
-	 element = driver.findElement(By.xpath("//div[@class='popover-content']//div"));
-	 libs.HighlightElement(driver, element);
-	}
-	catch(Exception e)
-	{		
-	 System.out.println("txt_downPaymentAlertText");
-	}
-	return element;
-	}
-	public static WebElement tab_vehicleDetailsTab (WebDriver driver)
-	{
-	try
-	{
-	 element = driver.findElement(By.xpath("//li[@class='single-tab vehicle-details active']"));
-	 libs.HighlightElement(driver, element);
-	}
-	catch(Exception e)
-	{		
-	 System.out.println("tab_vehicleDetailsTab");
-	}
-	return element;
-	}
-	public static WebElement tab_payment (WebDriver driver)
-	{
-	try
-	{
-	 element = driver.findElement(By.xpath("//li[@class='single-tab payment complete']"));
-	 libs.HighlightElement(driver, element);
-	}
-	catch(Exception e)
-	{		
-	 System.out.println("tab_vehicleDetailsTab");
-	}
-	return element;
-	}
-	public static WebElement val_avlincentives (WebDriver driver)
-	{
-	try
-	{
-	 element = driver.findElement(By.xpath("//li[@class='single-tab vehicle-details active']"));
-	 libs.HighlightElement(driver, element);
-	}
-	catch(Exception e)
-	{		
-	 System.out.println("tab_vehicleDetailsTab");
-	}
-	return element;
-	}
 	
-	public static WebElement lnk_KBBTradeIn(WebDriver driver)
-	{
-	try
-	{
-	 element = driver.findElement(By.xpath("//a[@data-ng-click=\"goToTab('trade-in')\"]"));
-	 libs.HighlightElement(driver, element);
-	}
-	catch(Exception e)
-	{		
-	 System.out.println("lnk_KBBTradeIn");
-	}
-	return element;
-	}
-	public static List<WebElement> paymentTypes(WebDriver driver)
-		{
-		 try{
-			WebDriverWait wait=new WebDriverWait(driver,5);
-	    	elements = driver.findElements(By.xpath("(//div[@class = 'row small-gutters'])[position()=1]//a"));
-		 }
-			catch(Exception e)
-			{		
-			 System.out.println("paymentTypes");
-			}
-			return elements;
-		}
 	
-	 public static WebElement Select_AnnualPayment(WebDriver driver)
-		{
-		 try{
-			WebDriverWait wait=new WebDriverWait(driver,5);
-	    	element = driver.findElement(By.xpath("//select[@data-ng-model='leaseMiles']"));
-		 }
-			catch(Exception e)
-			{		
-			 System.out.println("Select_AnnualPayment");
-			}
-			return element;
-		}
-	 
-	 public static List<WebElement> monthlyPaymentsList(WebDriver driver)
-		{
-		 try{
-			WebDriverWait wait=new WebDriverWait(driver,5);
-	    	elements = driver.findElements(By.xpath("(//span[@class = 'monthly-payment ng-binding'])[position()=1]"));
-		 }
-			catch(Exception e)
-			{		
-			 System.out.println("monthlyPaymentsList");
-			}
-			return elements;
-		}
-	 
-	 public static WebElement monthlyPayments(WebDriver driver , int position)
-		{
-		 try{
-			WebDriverWait wait=new WebDriverWait(driver,5);
-	    	elements = driver.findElements(By.xpath("(//span[@class = 'monthly-payment ng-binding'])[position()="+position+"]"));
-		 }
-			catch(Exception e)
-			{		
-			 System.out.println("lnk_KBBTradeIn");
-			}
-			return element;
-		}
-	 
-		public static WebElement txt_EstimateKBBTradeInValue(WebDriver driver)
-		{
-		try
-		{
-		 element = driver.findElement(By.xpath("(//div[@class='tradeInEstimatedNetCredit parbase section elementBase']//td[@class='ng-binding'])[position()=1]"));
-		 libs.HighlightElement(driver, element);
-		}
-		catch(Exception e)
-		{		
-		 System.out.println("txt_EstimateKBBTradeInValue");
-		}
-		return element;
-		}
-		
-		public static WebElement txt_EstimateKBBTradeInInput(WebDriver driver)
-		{
-		try
-		{
-		 element = driver.findElement(By.xpath("(//div[@class='tradeInEstimatedNetCredit parbase section elementBase']//td[@class='tabPrice']//input)[position()=1]"));
-		 libs.HighlightElement(driver, element);
-		}
-		catch(Exception e)
-		{		
-		 System.out.println("txt_EstimateKBBTradeInInput");
-		}
-		return element;
-		}
-		
-		public static WebElement txt_EstimateKBBTradeInPopupHeader(WebDriver driver)
-		{
-		try
-		{
-		 element = driver.findElement(By.xpath("//h4[@class = 'modal-title']"));
-		 libs.HighlightElement(driver, element);
-		}
-		catch(Exception e)
-		{		
-		 System.out.println("txt_EstimateKBBTradeInPopupHeader");
-		}
-		return element;
-		}
-		
-		public static WebElement txt_EstimateKBBTradeInPopupBody(WebDriver driver)
-		{
-		try
-		{
-		 element = driver.findElement(By.xpath("//h4[@class = 'modal-title']"));
-		 libs.HighlightElement(driver, element);
-		}
-		catch(Exception e)
-		{		
-		 System.out.println("txt_EstimateKBBTradeInPopupBody");
-		}
-		return element;
-		}
-		
-		public static WebElement btn_EstimateKBBTradeInPopupClose(WebDriver driver)
-		{
-		try
-		{
-		 element = driver.findElement(By.xpath("//button[@type= 'button'][@class = 'btn btn-primary']"));
-		 libs.HighlightElement(driver, element);
-		}
-		catch(Exception e)
-		{		
-		 System.out.println("btn_EstimateKBBTradeInPopupClose");
-		}
-		return element;
-		}
-		 public static WebElement EstmMonthlyPaymentMonts (WebDriver driver)
-			{
-					try
-					{element = driver.findElement(By.xpath("//table[@class = 'elementComponent']//th[contains(text(),'Estimated Monthly Payment')]/..//td[@class = 'ng-binding']//span"));
-			libs.HighlightElement(driver, element);}catch(Exception e){
-			
-			}
-					return element;
-			}
-		 public static WebElement TermInMonths (WebDriver driver)
-			{
-					try
-					{element = driver.findElement(By.xpath("//table[@class = 'elementComponent']//th[contains(text(),'Term')]/..//td[@class = 'ng-binding']"));
-			libs.HighlightElement(driver, element);}catch(Exception e){
-			
-			}
-					return element;
-			}
-		
+	
+	
+	
 }

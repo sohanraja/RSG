@@ -1,4 +1,5 @@
 package libraryClasses;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,26 +20,24 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import com.google.common.base.Function;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+
 import pageObjectClasses.*;
 import utilityClasses.*;
 
 @SuppressWarnings("unused")
-public class FuncitonLibrary  {
-	public static WebDriver driver1;
-	public static EventFiringWebDriver driver;
-	public static ExcelUtilityClass data;
-	public static ScreenShot getscrnSht = new ScreenShot();
+public class FuncitonLibrary {
+	public static WebDriver driver;
+	public static ExcelUtilityClass data;// = new ExcelUtilityClass();
+	public static ScreenShot getscrnSht = new utilityClasses.ScreenShot();
 	public static ExtentReports report,reporttest;
 	public static ExtentTest test,testSeranios;
 	public static String scrnshtPth;
@@ -54,8 +53,9 @@ public class FuncitonLibrary  {
 	public static String EnvironmentName=null;
 	public static String ApplicationName=null;
 	public static String Temp[];
-	public static String bottomtext;
-
+//	public static String vinNum ;
+//	public  int dRw;
+//	public WebDriverWait wait = new WebDriverWait(driver,6);
 	public static FuncitonLibrary libs = new FuncitonLibrary();
 	public static  Random rand = new Random();
 	public static SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/YYYY");
@@ -67,9 +67,9 @@ public class FuncitonLibrary  {
 
 	public void invokeReport(String testreport,int dRw) throws IOException {
 		report = ExtentReportManager.invokeExtentReport();
-
+//		reporttest = ExtentReportManager.invokeExtentReportForSenarios(data.getExcelData(dRw, "Testcase Name", "Testcases"));
 		test = report.startTest(testreport);
-
+//		testSenario=reporttest.startTest(testreport);
 		if( browser_val.contains("iPhone") || browser_val.contains("Galaxy")){
 			xpathvalue=2;
 		}
@@ -79,7 +79,7 @@ public class FuncitonLibrary  {
 	}
 		public static void invokeTestSenario(String TestSenarioName,int rownumber  ){
 			test = report.startTest(TestSenarioName);
-		
+//			test.log(TestSenarioName, "Test Senarion ("+rownumber+") inciated ");
 		}
 	
 		//Check if the alert is present
@@ -88,10 +88,10 @@ public class FuncitonLibrary  {
 		    try {
 		        driver.switchTo().alert();
 		        return true;
-		    } 
+		    } // try
 		    catch (Exception e) {
 		        return false;
-		    } 
+		    } // catch
 
 		}
 	//*********************************************************END**********************************************************************************
@@ -164,7 +164,7 @@ public class FuncitonLibrary  {
 			    			return true;
 			    		}catch(Exception exception)
 			    		{
-			    			
+			    			// System.out.println(exception.getMessage());
 			    			
 			    		}
 			    	++countdown;
@@ -330,7 +330,7 @@ public void assertiontrue(boolean str1,  ExtentTest test, WebDriver driver, Stri
 	 // highlight element1=================================================
 	 public void  HighlightElement(WebDriver driver,WebElement element){
 		 JavascriptExecutor js = (JavascriptExecutor) driver;
-
+//		  js.executeScript("arguments[0].style.border='2px groove red'", element);
 		  try {
 			Thread.sleep(1000);
 			js.executeScript("arguments[0].style.border='2px groove red'", element);
@@ -358,38 +358,29 @@ public void assertiontrue(boolean str1,  ExtentTest test, WebDriver driver, Stri
 			try {if(element.isDisplayed()) {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			  js.executeScript("arguments[0].style.border='2px groove red'", element);
-			  String actual=element.getText();
-			  if(attributename.contains("Yes"))
-				{
-				 actual=actual.replaceAll("[\\D]", "");
-				 }
-			  if(actual.trim().equalsIgnoreCase(Expected)){
-
+//			  element.click();
+			  if(element.getText().trim().equalsIgnoreCase(Expected)){
 				  js.executeScript("arguments[0].style.border=''", element);
 				  test.log(LogStatus.PASS,"Verify the  text/Number("+Expected+")", "Text/Number has been verified successfully.");
 
 				  
 			  } else {
-
 				  scrnshtPthNm=scrnshtPth+objectname+".jpg";
 				  getscrnSht.getscreenshot(driver,scrnshtPthNm );
 				  test.log(LogStatus.FAIL, "Verify the Text/Number("+Expected+")", "actual Text/Number does't matched with  expected text"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
 
-
+//				  Log.error("object name"+":"+objectname+"\tUrl"+driver.getCurrentUrl());
 			  }
 			  }}catch(Exception exception) {
-				  System.out.println("Expected :: "+Expected);
-				  System.out.println("PASSED :: "+objectname);
-				  exception.printStackTrace();
 				  scrnshtPthNm=scrnshtPth+objectname+".jpg";
 				  getscrnSht.getscreenshot(driver,scrnshtPthNm );
 				  test.log(LogStatus.FAIL, "Verify the Text/Number for the ("+objectname+")", "the Given object ("+objectname+") is not displayed on the page"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
 
-
+//				  Log.error("object name"+":"+objectname+"\tUrl"+driver.getCurrentUrl());
 			  }
 		}
 public void  VerifyElement(WebElement element,String objectname,WebDriver driver,ExtentTest test,int dRw) throws Exception{
-
+//	String scrnshtPth = data.getStrExcelData(dRw, 8, 5);
 	try 
 	{
 		if(element.isDisplayed())
@@ -448,7 +439,7 @@ public String Failedreason(Exception Excep){
 		StackTraceElement[] stacktrace = Thread.currentThread().getStackTrace();
 		 StackTraceElement e = stacktrace[1];
 		System.out.println("method name: "+ e.getMethodName()+ "\tResoan"+arg[0] );
-	return "method name: "+ e.getMethodName();
+	return "method name: "+ e.getMethodName();//+ "\tResoan:"+arg[0];
 	
 }
 public static void invokeReportTestSernarios(String tcName,String tcdescription) 
@@ -456,7 +447,7 @@ public static void invokeReportTestSernarios(String tcName,String tcdescription)
 	reporttest = ExtentReportManager.invokeExtentReport();
 	if(Count==0){
 	testSeranios = reporttest.startTest("<b style=background-color:green;>"+tcName, tcName+" execution is completed successfully");
-	testSeranios.log(LogStatus.INFO,"TestSenarios Description:"+tcdescription);
+	testSeranios.log(LogStatus.INFO,"TestScenarios Description:"+tcdescription);
 	Count=0;
 	}
 	else {
@@ -523,7 +514,8 @@ public void enterValueIntoTextField(WebElement ObjectName,String TextFieldName,S
 		  scrnshtPthNm=scrnshtPth+TextFieldName+".jpg";
 		  getscrnSht.getscreenshot(driver,scrnshtPthNm );
 			test.log(LogStatus.FAIL, "Enter a value into"+TextFieldName, "the given field("+TextFieldName+") is not displayed/disabled "+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//			testSenario.log(LogStatus.FAIL, "Enter a value into"+TextFieldName, "the given field("+TextFieldName+") is not displayed/disabled"+test.addScreenCapture(scrnshtPthNm) );
+//			Log.info("field name:"+TextFieldName+ "class name: "+this.getClass().getName());
 		  
 	  }
 	  
@@ -531,7 +523,8 @@ public void enterValueIntoTextField(WebElement ObjectName,String TextFieldName,S
   {scrnshtPthNm=scrnshtPth+TextFieldName+".jpg";
   	getscrnSht.getscreenshot(driver,scrnshtPthNm );
 	test.log(LogStatus.FAIL, "Enter a value into"+TextFieldName, "the given field("+TextFieldName+") is not displayed/disabled"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//	testSenario.log(LogStatus.FAIL, "Enter a value into"+TextFieldName, "the given field("+TextFieldName+") is not displayed/disabled"+test.addScreenCapture(scrnshtPthNm) );
+//	Log.error("field name:"+TextFieldName+ "class name: "+this.getClass().getName());
 	  
   }
 
@@ -554,23 +547,26 @@ try{
 	driver.get(CookieURL);
 	Thread.sleep(500);
 	driver.get(url);
-
+//	if(PGO_landing_page.txt_lpHeader(driver).isDisplayed()) {
+//		testSenario.log(LogStatus.PASS, "Enter the URL", "Application invoked successfully");
 		test.log(LogStatus.PASS, "Enter the URL", "Application invoked successfully");
-
+//	}
 	
 }catch(Exception e){
 	try {driver.get(CookieURL);
-
+//	wait.wait(60);
 	driver.get(url);
-
+//	if(PGO_landing_page.txt_lpHeader(driver).isDisplayed()) {
+//		testSenario.log(LogStatus.PASS, "Enter the URL", "Application invoked successfully");
 		test.log(LogStatus.PASS, "Enter the URL", "Application invoked successfully");
-
+//	}
 	
 	}catch(Exception E){
 		 scrnshtPthNm=scrnshtPth+"url.jpg";
 		 getscrnSht.getscreenshot(driver,scrnshtPthNm );
 		test.log(LogStatus.FAIL, "verify the page", "page is not opened"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//		testSenario.log(LogStatus.FAIL, "verify the page", "page is not opened"+test.addScreenCapture(scrnshtPthNm) );
+//		Log.error("\tUrl"+driver.getCurrentUrl());
 	  
 	}
 }
@@ -595,12 +591,12 @@ public boolean IMGValidation(WebElement element,String actual,String Expected,St
 try{
 if(element.isDisplayed()){
 	test.log(LogStatus.PASS, actual, Expected);
-
+//	testSenario.log(LogStatus.PASS, actual, Expected);
 } else {
 	 scrnshtPthNm=scrnshtPth+ObjectName+".jpg";
 	 getscrnSht.getscreenshot(driver,scrnshtPthNm );
 	test.log(LogStatus.FAIL, actual, "The given object is not identified in the page"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//	testSenario.log(LogStatus.FAIL, actual, "The given object is not identified in the page"+test.addScreenCapture(scrnshtPthNm) );
 }
 
 }catch(AssertionError exception)
@@ -608,7 +604,8 @@ if(element.isDisplayed()){
 	scrnshtPthNm=scrnshtPth+ObjectName+".jpg";
 	 getscrnSht.getscreenshot(driver,scrnshtPthNm );
 	test.log(LogStatus.FAIL, actual, "The given object is not identified in the page"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//	testSenario.log(LogStatus.FAIL, actual, "The given object is not identified in the page"+test.addScreenCapture(scrnshtPthNm) );
+//	Log.error("ObjectName :"+ ObjectName+"\tUrl"+driver.getCurrentUrl());
 	return false;
 }
 return true;
@@ -634,7 +631,7 @@ try {
 	element.click();
 	test.log(LogStatus.INFO, "unexpected popup closed");
 }catch(Exception e){
-
+//	Log.info("unexpected pop up not appeared");
 	
 }
 
@@ -658,7 +655,6 @@ public void clickOnButton(WebElement ObjectName,String butttonname) throws Excep
   {		
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("arguments[0].style.border='2px groove red'", ObjectName);
-
 	  ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", ObjectName);
 	  if(ObjectName.isDisplayed() && ObjectName.isEnabled()) {
 		  try{
@@ -672,7 +668,8 @@ public void clickOnButton(WebElement ObjectName,String butttonname) throws Excep
 		  scrnshtPthNm=scrnshtPth+butttonname+".jpg";
 			 getscrnSht.getscreenshot(driver,scrnshtPthNm );
 			test.log(LogStatus.FAIL, butttonname, "The given button is not identified in the page"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//			testSenario.log(LogStatus.FAIL, butttonname, "The given button is not identified in the page"+test.addScreenCapture(scrnshtPthNm) );
+//			Log.info("buttonname:"+butttonname+ "class name: "+this.getClass().getName());
 	  }
 
 	  
@@ -680,7 +677,8 @@ public void clickOnButton(WebElement ObjectName,String butttonname) throws Excep
   {scrnshtPthNm=scrnshtPth+butttonname+".jpg";
 	 getscrnSht.getscreenshot(driver,scrnshtPthNm );
 	test.log(LogStatus.FAIL, butttonname, "The given button is not identified in the page"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//	testSenario.log(LogStatus.FAIL, butttonname, "The given button is not identified in the page"+test.addScreenCapture(scrnshtPthNm) );
+//	Log.error("buttonname:"+butttonname+ "class name: "+this.getClass().getName());
 }
 }
 
@@ -699,7 +697,8 @@ try
 		  scrnshtPthNm=scrnshtPth+linktextname+".jpg";
 			 getscrnSht.getscreenshot(driver,scrnshtPthNm );
 			test.log(LogStatus.FAIL, linktextname, "the given link text("+linktextname+")"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//			testSenario.log(LogStatus.FAIL, linktextname, "the given link text("+linktextname+")"+test.addScreenCapture(scrnshtPthNm) );
+//			Log.info("buttonname:"+linktextname+ "class name: "+this.getClass().getName());
 	  }
 
 	  
@@ -707,7 +706,8 @@ try
   {scrnshtPthNm=scrnshtPth+linktextname+".jpg";
 	 getscrnSht.getscreenshot(driver,scrnshtPthNm );
 	 test.log(LogStatus.FAIL, linktextname, "the given link text("+linktextname+")"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
+//		testSenario.log(LogStatus.FAIL, linktextname, "the given link text("+linktextname+")"+test.addScreenCapture(scrnshtPthNm) );
+//		Log.error("buttonname:"+linktextname+ "class name: "+this.getClass().getName());
   }
 
 
@@ -761,34 +761,18 @@ public String changeUrlApplication()
  * Modified Comments: < >
  * --------------------------------------------------------------------
  */
-public void  VerifyPartialText(WebElement element,String Expected, String objectname,String attributename) throws Exception{
-try {if(element.isDisplayed())
-{
+public void  VerifyPartialText(WebElement element,String Expected, String objectname) throws Exception{
+	
+	try {if(element.isDisplayed()) {
 	JavascriptExecutor js = (JavascriptExecutor) driver;
-	js.executeScript("arguments[0].style.border='2px groove red'", element);
-	if(attributename.contains("Yes"))
-	{
-		String actual=element.getText();
-		actual=actual.replaceAll("[\\D]", "");
-		  if(actual.contains(Expected))
-		  {
-			  js.executeScript("arguments[0].style.border=''", element);
-			  test.log(LogStatus.PASS,"Verify the  text"+Expected, "Text has been verified successfully.");
-		  }
-		  else {
-			  scrnshtPthNm=scrnshtPth+objectname+".jpg";
-			  getscrnSht.getscreenshot(driver,scrnshtPthNm );
-			  test.log(LogStatus.FAIL, "Verify the text("+Expected+")", "actual text does't matched with  expected text"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
+	  js.executeScript("arguments[0].style.border='2px groove red'", element);
 
-		  }
-	 }
-	  else
-	   if(element.getText().contains(Expected)) {
+	  if(element.getText().contains(Expected)) {
 		  js.executeScript("arguments[0].style.border=''", element);
 		  test.log(LogStatus.PASS,"Verify the  text"+Expected, "Text has been verified successfully.");
-	  }
+
 		  
-	  else {
+	  } else {
 		  scrnshtPthNm=scrnshtPth+objectname+".jpg";
 		  getscrnSht.getscreenshot(driver,scrnshtPthNm );
 		  test.log(LogStatus.FAIL, "Verify the text("+Expected+")", "actual text does't matched with  expected text"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
@@ -811,7 +795,7 @@ try {if(element.isDisplayed())
  * Modified Comments: < >
  * --------------------------------------------------------------------
  */
-public void  selectValueFromDropDown(WebElement element,String dropdownvalue,String objectname,int index) throws Exception{
+public void  selectValueFromDropDown(WebElement element,String dropdownvalue, String objectname) throws Exception{
 	
 	try {
 		Thread.sleep(2000);
@@ -819,11 +803,8 @@ public void  selectValueFromDropDown(WebElement element,String dropdownvalue,Str
 	JavascriptExecutor js = (JavascriptExecutor) driver;
 	  js.executeScript("arguments[0].style.border='2px groove red'", element);
 	  Select dropDown=new Select(element);
-	  if(dropdownvalue.equals("")){
-		  dropDown.selectByIndex(index);  
-	  }else{
 	  dropDown.selectByVisibleText(dropdownvalue);
-	  }
+
 	  }else
 		  {
 		  scrnshtPthNm=scrnshtPth+objectname+".jpg";
@@ -894,7 +875,6 @@ public void Disclaimers(String objectname) throws Exception
 {
 	String Expectedvalue,Disclaimername = null,Disclaimerdisc=null;
 	String columnname=null;
-	
 	WebElement webelement=null;
 	 JavascriptExecutor js = (JavascriptExecutor) driver;
 	 int dis=0;
@@ -916,7 +896,8 @@ public void Disclaimers(String objectname) throws Exception
 			((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",Disclaimers.get(dis) );
 			Disclaimers.get(dis).click();
 			Thread.sleep(1000);
-
+//			Disclaimerdisc=	Disclaimers.get(dis).getAttribute("data-content");
+//			if(Disclaimerdisc==null){
 				
 				DisclaimbersPopUp=driver.findElements(By.xpath("//div[contains(@class,'popover')]"));
 				for(int disp=0;disp<DisclaimbersPopUp.size();disp++){
@@ -926,14 +907,14 @@ public void Disclaimers(String objectname) throws Exception
 					Disclaimerdisc=DisclaimbersPopUp.get(disp).getText();
 					break;
 				}
-
+//			}
 				Disclaimerdisc=Disclaimerdisc.replaceAll("\\s+","");
 				if(Disclaimerdisc.contains(objectname)){
 					Disclaimerdisc=Disclaimerdisc.replaceAll(objectname+".","");
 				}
 			
 			if(Expectedvalue.equalsIgnoreCase(Disclaimerdisc)){
-				test.log(LogStatus.PASS, "Verify the Disclaimer value for :"+objectname+"."+Disclaimername, "given disclaimer text has  displayed as excepted");
+				test.log(LogStatus.PASS, "Verify the Disclaimer value for :"+Disclaimername, "given disclaimer text has  displayed as excepted");
 				
 			}else{
 				webelement=(WebElement) ((JavascriptExecutor) driver)  
@@ -942,13 +923,13 @@ public void Disclaimers(String objectname) throws Exception
 				  js.executeScript("arguments[0].style.border='2px groove red'", webelement);
 				 scrnshtPthNm=scrnshtPth+objectname+dis+".jpg";
 				 getscrnSht.getscreenshot(driver,scrnshtPthNm );
-				test.log(LogStatus.FAIL, "Verify the Disclaimer value for :"+objectname+"."+Disclaimername, "given disclaimer("+Disclaimername+") text has not matched  as excepted"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
+				test.log(LogStatus.FAIL, "Verify the Disclaimer value for :"+objectname, "given disclaimer("+Disclaimername+") text has not matched  as excepted"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
 			}
 			Disclaimerdisc=null;
 			try {
 			if(Disclaimers.get(dis).getAttribute("aria-describedby").contains("popover")){
 		
-				test.log(LogStatus.INFO, "Verify the Disclaimer close button for :"+objectname+"."+Disclaimername, "given disclaimer close button has been displayed");
+				test.log(LogStatus.INFO, "Verify the Disclaimer close button for :"+objectname, "given disclaimer close button has been displayed");
 				
 			}}catch(Exception exception){
 						webelement=(WebElement) ((JavascriptExecutor) driver)  
@@ -957,7 +938,7 @@ public void Disclaimers(String objectname) throws Exception
 						  js.executeScript("arguments[0].style.border='2px groove red'", webelement);
 						  scrnshtPthNm=scrnshtPth+objectname+dis+"popover.jpg";
 						 getscrnSht.getscreenshot(driver,scrnshtPthNm );
-						test.log(LogStatus.FAIL, "Verify the Disclaimer close button for :"+objectname+"."+Disclaimername, "given disclaimer("+Disclaimername+") close button not displayed"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
+						test.log(LogStatus.FAIL, "Verify the Disclaimer close button for :"+objectname, "given disclaimer("+Disclaimername+") close button not displayed"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
 			}
 			
 		}
@@ -966,7 +947,7 @@ public void Disclaimers(String objectname) throws Exception
 
 		 scrnshtPthNm=scrnshtPth+objectname+".jpg";
 		  getscrnSht.getscreenshot(driver,scrnshtPthNm );
-		  test.log(LogStatus.FAIL, "Verify the Disclaimer for:"+objectname+"."+Disclaimername, "given disclaimer ("+Disclaimername+")is not there in application"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
+		  test.log(LogStatus.FAIL, "Verify the Disclaimer for:"+objectname, "given disclaimer ("+Disclaimername+")is not there in application"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
 		 }
 }
 /**
@@ -983,14 +964,13 @@ public void Disclaimers(String objectname) throws Exception
 
 
 public void Pagedisclaimers(String SheetName,int TotalNumber) throws Exception
-{if(NonFuncational.equalsIgnoreCase("Yes")){
+{
+	if(NonFuncational.equalsIgnoreCase("Yes")){
 	try{
 		test.log(LogStatus.INFO,"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style=background-color:yellow;> Disclaimers verification ");
 		String disclaimer;
-		int disclaimberscount=0;
 		for(int disclaimers=0;disclaimers<=TotalNumber;disclaimers++){
 			disclaimer=data.getExcelData(1, "Disclosures"+disclaimers, SheetName);
-
 			libs.Disclaimers(disclaimer);
 		}
 }catch(Exception searchInventoryException){
@@ -1027,7 +1007,7 @@ public void Disclosers() throws Exception
 			if(Disclosers.get(Discloser).getText().isEmpty())
 				continue;
 			
-			if(Discloser<31){
+			if(Discloser<30){
 				diclosename=data.getExcelData(2, "Discloser_"+(Discloser+1), "LP_Disclaimer");
 			Expected=diclosename+data.getExcelData(1, "Discloser_"+(Discloser+1), "LP_Disclaimer"); 
 				}else{
@@ -1038,7 +1018,7 @@ public void Disclosers() throws Exception
 			Actuval=Disclosers.get(Discloser).getText();
 			Actuval=Actuval.replaceAll("\\s+","");
 					
-			if(Actuval.equalsIgnoreCase(Expected.trim())){
+			if(Actuval.equalsIgnoreCase(Expected)){
 					test.log(LogStatus.PASS, "Verify the Discloser text("+diclosename+") :", "given discloser text has  displayed as excepted");
 				}else{				
 					((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", Disclosers.get(Discloser));				
@@ -1209,14 +1189,14 @@ public void  VerifyTextwithAttribute(WebElement element,String Expected, String 
 		  getscrnSht.getscreenshot(driver,scrnshtPthNm );
 		  test.log(LogStatus.FAIL, "Verify the Text/Number("+Expected+")", "actual Text/Number does't matched with  expected text"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
 
-
+//		  Log.error("object name"+":"+objectname+"\tUrl"+driver.getCurrentUrl());
 	  }
 	  }}catch(Exception exception) {
 		  scrnshtPthNm=scrnshtPth+objectname+".jpg";
 		  getscrnSht.getscreenshot(driver,scrnshtPthNm );
 		  test.log(LogStatus.FAIL, "Verify the Text/Number for the ("+objectname+")", "the Given object ("+objectname+") is not displayed on the page"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
 
-
+//		  Log.error("object name"+":"+objectname+"\tUrl"+driver.getCurrentUrl());
 	  }
 }
 /**
@@ -1250,7 +1230,6 @@ public void UnexpectedPopup()
  */
 public void tabList(String pagename) throws Exception
 {
-	componenttHeading("tab Container");
 	try{
 		String Tablistname=null;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -1264,7 +1243,7 @@ public void tabList(String pagename) throws Exception
 				  test.log(LogStatus.PASS,"Verify the  Tab list text", "Text ("+Tablistname+") has been verified successfully.");
 	
 			}else{
-				test.log(LogStatus.FAIL,"Verify the  Tab list text", "Text ("+Tablistname+") has not displayed.");
+				test.log(LogStatus.PASS,"Verify the  Tab list text", "Text ("+Tablistname+") has not displayed.");
 			}
 		}
 		
@@ -1281,79 +1260,9 @@ public void tabList(String pagename) throws Exception
 public void componenttHeading(String Componentname){
 	test.log(LogStatus.INFO,"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style=background-color:yellow;>  "+ Componentname);
 }
-
-public String getStringFromAlphaNumaric(String name,String retrun){
-		
-	switch(retrun)
-	{ 
-		case "string":	return name.replaceAll("[^a-z^A-Z?!\\.]","");
-						
-		case "number":  return name.replaceAll("[^0-9?!\\.]",""); 
-	
-	}
-	return "worng input";
-	
-}
-
-/**
- * --------------------------------Method------------------------------
- * Method Name: < TextCompare > 
- * Description: <This method will compare the text >
- * Author: <Chandra Reddy K > 
- * Created Date: < 10/11/2017 > 
- * Modified By and On: < >
- * Modified Comments: < >
- * --------------------------------------------------------------------
- */
-public void  TextCompare(String actuval,String Expected,String actuvalstep , String expectedstep ) throws Exception{
-	
-	
-	  if(actuval.equalsIgnoreCase(Expected)) {
-		
-		  test.log(LogStatus.PASS,actuvalstep, expectedstep);
-	  } else {
-		  scrnshtPthNm=scrnshtPth+Expected+".jpg";
-		  getscrnSht.getscreenshot(driver,scrnshtPthNm );
-		  test.log(LogStatus.FAIL, actuvalstep, "actual text does't matched with  expected text"+test.addScreenCapture(Screenpathforreport(scrnshtPthNm)) );
-
-	  }
-	
-}
-
-
-/** --------------------------------Method------------------------------
-* Method Name: < DateDifference > 
-* Description: <This method will provide the current date in the required format.  >
-* Author: <Nagendra T S > 
-* Created Date: < 10/27/2017 > 
-* Modified By and On: < >
-* Modified Comments: < >
-* --------------------------------------------------------------------*/
-public String  DateDifference(String Value,int NoOfDays,SimpleDateFormat formatter ) throws Exception{
-	
-	String formatedDate="";
-	if(Value.equalsIgnoreCase("Format"))
-	{
-		SimpleDateFormat formater = new SimpleDateFormat("dd");
-		int data = Integer.parseInt(formater.format(date));
-		System.out.println(data);
-		if(data<9)
-		{
-			SimpleDateFormat formaterr = new SimpleDateFormat("MMM d, YYYY");
-			return formaterr.format(date);
-		}
-		else
-		{
-			SimpleDateFormat formaterr = new SimpleDateFormat("MMM dd, YYYY");
-			return formaterr.format(date);
-		}
-	}
-	
-	
-	return formatedDate;
-}
-
-
+//public void waitForPage(WebDriver driver,int timeout){
+//	new WebDriverWait(driver, timeout).until(WebDriver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+//}
 }
 
 

@@ -8,7 +8,8 @@ public class EnvironmentVariables {
 	
 	 public static final  String browserVal = "chrome";
 	 public static final  String autUrl = "https:\\wwwqa.shop.ford.com/buy";
-
+//     public static final  String aut_usrNm = "SSUBRA68";
+//	 public static final  String aut_pswd = "Ford12345";
 	 public static final String projName = "RSG_DRE";
 	 public static final  String projPath = "C:\\Users\\SSubra68\\workspace\\RSG_DRE_QA_Saravana\\RSG_QA\\"+projName;
 	 public static final  String tstDataSht = projPath+"\\TestData.xlsx";

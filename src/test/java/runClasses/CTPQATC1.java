@@ -13,7 +13,16 @@ import pageClasses.*;
 import utilityClasses.ExcelUtilityClass;
 import utilityClasses.ScreenShot;
 public class CTPQATC1 extends rsg_DriverClass{	
-
+//	WebDriver driver;
+//	ExcelUtilityClass data = new ExcelUtilityClass();
+//	ScreenShot getscrnSht = new ScreenShot();
+	
+//	@BeforeClass
+//	public  void chromekill() throws Exception
+//	{
+//		//		Runtime.getRuntime().exec("TASKKILL /IM chromedriver.exe /F");    // closing the IE.exe, ChromeDriver.exe process from the system
+//		//        Runtime.getRuntime().exec("TASKKILL /IM chrome.exe /F");
+//	}
 
 	@Test
 	public void landing_Page() throws Exception
@@ -22,60 +31,64 @@ public class CTPQATC1 extends rsg_DriverClass{
 		actions = new Actions(driver);
 		
 		System.out.println("row count : "+dtaRwCnt);
-
+//		String scrnshtPth = data.getStrExcelData(1, 5, 2);
 		scrnshtPth = System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\Screenshots\\";
 		System.out.println(dtaRwCnt);
-		for(int dRw=1; dRw<=dtaRwCnt;dRw++){
+		for(int dRw=1; dRw<=19;dRw++){
 			try{
 				testsenarioname=data.getExcelData(dRw, "Testcase Name", "Testcases");
 				testSenarioDesc=data.getExcelData(dRw, "Scenario Description", "Testcases");
 				ValidationStatus=data.getExcelData(dRw, "ValidationStatus", "Testcases");
 				NonFuncational=data.getExcelData(dRw, "Non Funcational", "Testcases");
 				System.out.println("test case iteration : "+dRw);
-
 				
-				//		Landing Page
+//				//sign-in
+//				signIn sign=new signIn();
+//				sign.SignIn_run(dRw);
+				
+////				//		Landing Page
 				landing_Page lp = new landing_Page();
 				lp.hwItWrks_run(dRw);
-
+//
 				//Chat Window
 				chat chat = new chat();
 				chat.chatWinVal_run(dRw);
 
 				//Questions Window
-				questionsTab qTab = new questionsTab();
-				qTab.quesTabVal_run(dRw);
-
-
-				// 		Vehicle Flyout
+//				questionsTab qTab = new questionsTab();
+//				qTab.quesTabVal_run(dRw);
+//
+//
+//				// 		Vehicle Flyout
 				vehicleFlyout vfo =new vehicleFlyout();
 				vfo.vehFlyOut_run(dRw);	
 
 //				//						Vehicle Cards
 				vehicleCards vCards = new vehicleCards();
 			vCards.vhclCrds_run(dRw);
-
-				//		Vehicle Details
+////
+////				//		Vehicle Details
 
 				VehicleDetails vehDtls = new VehicleDetails();
 				vehDtls.gtVehicleDtls_run(dRw);
-
-				// 		KBB trade in 
+////
+////				// 		KBB trade in 
 				kbbTradeIn kbb =new kbbTradeIn();
 				kbb.KbbTrdIn_run(dRw);
-
-				//		Payment Calculator
+////
+////				//		Payment Calculator
 				PaymentCalculator pmntCal = new PaymentCalculator();
 				pmntCal.PaymentCalculator_run(dRw);
-
-				// 		Review and send
+////
+////				// 		Review and send
 				reviewAndSend revSend =new reviewAndSend();
 				revSend.reviewAndSend_run(dRw);
-
-				// 		Credit form 	
+////
+////				// 		Credit form 	
 				creditForm CreForm=new creditForm();
 				CreForm.creditForm_run(dRw);
-				//		Credit App
+////
+////				//		Credit App
 			creditApp CreApp=new creditApp();
 				CreApp.creditApp_run(dRw);
 
@@ -91,10 +104,13 @@ public class CTPQATC1 extends rsg_DriverClass{
 			libs.invokeReportTestSernarios(testsenarioname,testSenarioDesc);
 			closeDriver();
 			Brosweropen(browser_val);
-
+//			if(data.getExcelData(dRw+1, "Execution", "Testcases").equalsIgnoreCase("No")) {
+//				dRw=dtaRwCnt+1;
+//			}
 		}
 		
-
+//		tearReport();
+//		testSenariostearsReport();
 	}
 
 }

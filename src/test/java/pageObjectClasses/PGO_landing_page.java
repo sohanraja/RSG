@@ -312,7 +312,7 @@ public class PGO_landing_page extends FuncitonLibrary {
 	}
 	public WebElement btn_selectrprice(WebDriver driver, String hrefVal)
 	{
-		try{element = driver.findElement(By.xpath("//a[contains(@href, 'vin="+hrefVal+"')]"));
+		try{element = driver.findElement(By.xpath("(//a[contains(@href, '"+hrefVal+"')])[position()=1]"));
 	libs.HighlightElement(driver, element);	}catch(Exception e){		
 		System.out.println("btn_selectrprice");
 		}
@@ -415,7 +415,7 @@ public class PGO_landing_page extends FuncitonLibrary {
 	}
 	public static WebElement txt_errorMessage(WebDriver driver)
 	{
-		try{element = driver.findElement(By.xpath("//p[@class='error']|//p[@class='error text-danger']"));
+		try{element = driver.findElement(By.xpath("//p[@class='error text-danger']"));
 	libs.HighlightElement(driver, element);	}catch(Exception e){		
 		System.out.println("txt_errorMessage");
 		}
@@ -431,16 +431,8 @@ public class PGO_landing_page extends FuncitonLibrary {
 	}
 	public static WebElement txt_BottomYear(WebDriver driver)
 	{
-		try{element = driver.findElement(By.xpath("//a[@class = 'copyright']|(//div[@class='col-sm-8 col-md-10']//ul//li)[position()=1]"));
+		try{element = driver.findElement(By.xpath("(//div[@class='col-sm-8 col-md-10']//ul//li)[position()=1]"));
 	libs.HighlightElement(driver, element);	}catch(Exception e){		
-		System.out.println("btn_ZipPopUpClose");
-		}
-		return element;
-	}
-	public static WebElement btn_PreviousYear(WebDriver driver)
-	{
-		try{element = driver.findElement(By.xpath("//span[@class='veh-type-txt veh-year-btn'][contains(text(),'Previous')]"));
-		libs.HighlightElement(driver, element);	}catch(Exception e){		
 		System.out.println("btn_ZipPopUpClose");
 		}
 		return element;

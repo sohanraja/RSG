@@ -15,17 +15,12 @@ public class PGO_SpecialOffers extends FuncitonLibrary{
 	
 	public static WebElement btn_SpecialOffers(WebDriver driver)
 	{
-		try
-		{
 		WebDriverWait wait=new WebDriverWait(driver,40);		
-		element=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='btn btn-dre nextTab hidden-sm hidden-xs pull-right ng-binding']")));
+		WebElement element=wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='btn btn-dre nextTab hidden-sm hidden-xs pull-right ng-binding']")));
 		libs.HighlightElement(driver, element);
-	
-		}
-		catch(Exception e)
-		{
-			System.out.println("btn_SpecialOffers");
-		}	return element;
-	}
+		return element;
 	}
 	
+	
+	
+}

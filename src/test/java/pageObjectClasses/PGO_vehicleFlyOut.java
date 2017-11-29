@@ -59,7 +59,7 @@ public class PGO_vehicleFlyOut extends FuncitonLibrary{
 	{try{
 		element = driver.findElement(By.xpath("//div[@class='saved-vehicles-icon']/span[@class='icon-image']"));
 	libs.HighlightElement(driver, element);	}catch(Exception e){
-		System.out.println("img_vehicleFlyout");
+		System.out.println("img_vehicleFlyout"+PGO_vehicleCards.class.getEnclosingMethod().getName());
 	}
 	return element;
 	}
@@ -159,8 +159,7 @@ public class PGO_vehicleFlyOut extends FuncitonLibrary{
 	public static WebElement txt_ReadyShopToGo(WebDriver driver)
 	{
 		try
-		{
-			element = driver.findElement(By.xpath("//p[@class='saved-vehicles-label hidden-md hidden-sm hidden-xs']|//p[@class='saved-vehicles-label hidden-sm hidden-xs']"));
+		{element = driver.findElement(By.xpath("//p[@class='saved-vehicles-label hidden-sm hidden-xs']"));
 			  libs.HighlightElement(driver, element);}catch(Exception e){
 				System.out.println("txt_ReadyShopToGo");
 			  }
@@ -172,30 +171,10 @@ public class PGO_vehicleFlyOut extends FuncitonLibrary{
 			element = driver.findElement(By.xpath("//div[@class='col-xs-4 text-center']//span[contains(@class,'dreicon icon-uni')]"));
 			libs.HighlightElement(driver, element);
 	 }catch(Exception e){
-
+//    	 test.log(LogStatus.FAIL,"Missing object name  and method name ", new Exception().getStackTrace()[0].getMethodName()+":"+new Exception().getStackTrace()[1].getMethodName());
      		System.out.println("Img_Addnewvehicle");
      	}
 	return element;
 	
-	}
-	
-	public static WebElement saved_vechicles_vinnumber (WebDriver driver,int position)
-	{
-		try{
-			element = driver.findElement(By.xpath("(//p[@class='vin ng-binding'])[position()="+position+"]"));
-			  libs.HighlightElement(driver, element);	
-		 }catch(Exception e){
-
-	     		System.out.println("saved_vechicles_vinnumber");
-     	}return element;	
-	}
-	public static WebElement saved_vechicles_delete (WebDriver driver,int position)
-	{
-		try{
-		element = driver.findElement(By.xpath("(//p[@class='delete']//a)[position()="+position+"]"));
-		}catch(Exception e){
-
-     		System.out.println("saved_vechicles_vinnumber");
-		}	  return element;
 	}
 }

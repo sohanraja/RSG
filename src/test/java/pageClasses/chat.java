@@ -1,8 +1,25 @@
 package pageClasses;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
 import libraryClasses.*;
 import pageObjectClasses.*;
+
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+
+import utilityClasses.*;
+
+
+
 public class chat extends rsg_DriverClass{
 
 	FuncitonLibrary libs = new FuncitonLibrary();
@@ -12,30 +29,22 @@ public class chat extends rsg_DriverClass{
 
 	public void  chatWinVal_run(int dRw) throws Exception
 	{
-		try 
-		{
-		String runVal = data.getExcelData(dRw,"Chat", "Testcases");
+
+			String runVal = data.getExcelData(dRw,"Chat", "Testcases");
+		System.out.println(runVal);
 		switch(runVal){
 		case "Yes":
-			invokeReport("Verify Chat Testcase",dRw);
+			invokeReport("Verify chat page",dRw);
 			chatWinVal(dRw);
-			test.log(LogStatus.PASS, "Chat testcase executed successfully");
-			data.writeExceldata(dRw, "Result", "Chat", "Passed");
+		
 			break;
 		case "No":
-			data.writeExceldata(dRw,"Result", "Chat","Not Executed");
-	        break;
+			System.out.println("'Chat' testcase will not be executed");
+			 data.writeExceldata(dRw,"Result", "Chat","Not Executed");
+	
+			break;
 		}
 		tearReport();
-	     }
-		catch(Exception E)
-		{
-			String scrnshtPthNm1="Test Scenario1\\Screenshots\\"+"chat_Failed_"+this.getClass().getSimpleName()+".jpg";
-			getscrnSht.getscreenshot(driver,scrnshtPthNm );
-			data.writeExceldata(dRw, "Result", "Chat", "Failed");
-            test.log(LogStatus.FAIL, "Chat test case failed", test.addScreenCapture(scrnshtPthNm1));
-        	tearReport();
-		}
 	}
 
 
@@ -52,14 +61,16 @@ public class chat extends rsg_DriverClass{
 			parentHandle = driver.getWindowHandle();
 			libs.clickOnButton(PGO_chat.img_chatIcon(driver), "chatIcon");
 			Thread.sleep(1000);
+
+			
 			for (String winHandle : driver.getWindowHandles()) 
 			{
 				driver.switchTo().window(winHandle); // switch focus of WebDriver to the next found window handle (that's your newly opened window)
 			}
 			if(driver.getCurrentUrl().contains("fmcc")){
 			
-			test.log(LogStatus.PASS, "verify the chat window ","Chat window has been opened");
-
+			test.log(LogStatus.INFO, "chat window opened ");
+			//code to do something on new window
 			test.log(LogStatus.INFO, "chat window title is : "+driver.getTitle());
 			test.log(LogStatus.INFO, "chat header is : "+PGO_chat.txt_chatHeader(driver).getText());
 			libs.IMGValidation(PGO_chat.img_chatLogo(driver), "Verify the Hello chat Image", "Hello chat Image has been displayed", "chat logo");
@@ -84,7 +95,10 @@ public class chat extends rsg_DriverClass{
 			else {	test.log(LogStatus.INFO, "Hello chat window text is: "+ PGO_chat.txt_chatLeaveMessage(driver).getText());
 					//Chat not live after 8.30 PM 
 					Thread.sleep(1000);
-
+//					libs.enterValueIntoTextField(PGO_chat.txt_chatNotLive(driver), "chat Not live", txtMessage);
+//					libs.enterValueIntoTextField(PGO_chat.txt_chatUserEmail(driver), "chat user Email", chatEmail);
+//					libs.clickOnButton(PGO_chat.btn_chatSend1(driver), "chat send");
+//					test.log(LogStatus.PASS, "Hello chat Thank you message: "+ PGO_chat.txt_chatThankYou(driver).getText());
 			}
 			data.writeExceldata(dRw,"Result", "Chat","Passed");
 			driver.close(); // close newly opened window when done with it
@@ -92,6 +106,8 @@ public class chat extends rsg_DriverClass{
 			}else{
 				getscrnSht.getscreenshot(driver, scrnshtPth+"ChatwindowWrongUrl"+libs.timestamp1()+".jpg");
 				test.log(LogStatus.FAIL, "Chat has opened with wrong URL",test.addScreenCapture(scrnshtPth +"ChatwindwVal_Failed_"+libs.timestamp1()+".jpg") );		
+				driver.close();
+				driver.switchTo().window(parentHandle);
 			}
 		}catch(Exception chatException)
 		{	Count++;

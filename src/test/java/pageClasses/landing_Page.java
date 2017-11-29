@@ -27,6 +27,7 @@ String pledgedsclmrExp;
 String SeeKelly;
 String SeeKellyExp;
 String zipCdcntntExp;
+String dgts4ZipCd;
 String Bottom_Year;
 public void hwItWrks_run(int dRw) throws Exception
 {
@@ -41,7 +42,11 @@ public void hwItWrks_run(int dRw) throws Exception
 		switch(runVal)
 		{
 		case "Yes":
+//			data.addColumn( "Amount_Calculator1","SearchVehicle");
 			AllvalidationForLandingpage(dRw);
+//			data.writeToExcel("PASSED", dRw, 5, SheetNum);
+//		    billBrdHmPg(dRw);
+//			libs.Iballs("EcoBoost");
 			searchInventory(dRw);
 			test.log(LogStatus.PASS, "Landing Page testcase executed successfully");
 			data.writeExceldata(dRw, "Result", "SearchVehicle", "Passed");
@@ -84,6 +89,7 @@ public void hwItWrks_run(int dRw) throws Exception
 			SeeKelly=data.getExcelData(1, "SeeKelly", "SearchVehicle");
 			SeeKellyExp=data.getExcelData(1, "SeeKellyExp", "SearchVehicle");
 			zipCdcntntExp=data.getExcelData(1, "zipCdcntntExp", "SearchVehicle");
+			dgts4ZipCd=data.getExcelData(dRw, "dgts4ZipCd", "SearchVehicle");
 			Bottom_Year=data.getExcelData(1, "Bottom_Year", "SearchVehicle");
 			driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
      		libs.GlobalHeadingBar();
@@ -113,26 +119,14 @@ public void hwItWrks_run(int dRw) throws Exception
 		libs.VerifyText(PGO_landing_page.txt_Seekelly(driver), SeeKelly, "txt_Seekelly", "");
 		libs.IMGValidation(PGO_landing_page.img_KelleyBule(driver), "Verify the Pledge Image", "Pledge image has been displayed", "img_KelleyBule");
 		
-		// Invalid Zipcode Validation
+		// zipce popup validation
 		libs.clickOnButton(PGO_landing_page.slct_lnkText(driver), "Choose Vehicle");
-		test.log(LogStatus.PASS, "Clicked on Choose Vehicle");
 		}
-		libs.componenttHeading("Invalid ZipCode Validation");
-		for(int Zipcode=1;Zipcode<=5;Zipcode++)
-		{
-		PGO_landing_page.txt_locationCd(driver).clear();	
-		String invalidzip=data.getExcelData(Zipcode, "Invalid_ZipCode", "SearchVehicle");
-		System.out.println(invalidzip);
-		libs.enterValueIntoTextField(PGO_landing_page.txt_locationCd(driver), "zip code", invalidzip);
+		PGO_landing_page.txt_locationCd(driver).clear();
+		libs.enterValueIntoTextField(PGO_landing_page.txt_locationCd(driver), "zip code", dgts4ZipCd);
 		Thread.sleep(1000);
 		libs.clickOnButton(PGO_landing_page.btn_continue(driver), "serch vechile/continue");
 		libs.VerifyText(PGO_landing_page.txt_errorMessage(driver),zipCdcntntExp, "Zipcode error message","");
-		if(driver.getCurrentUrl().contains("Showroom"))
-		{
-		  getscrnSht.getscreenshot(driver, scrnshtPth +"ZipCode_Failed_"+libs.datestamp()+".jpg");
-		  test.log(LogStatus.FAIL,"Verify the Zip code page " ,test.addScreenCapture(scrnshtPth +"ZipCode_Failed_"+libs.datestamp()+".jpg") );
-		}
-		}
 		if(applicationname.contains("RSG")){
 		libs.clickOnButton(PGO_landing_page.btn_ZipPopUpClose(driver), "Zip Code close ");
 		}
@@ -173,16 +167,13 @@ public void hwItWrks_run(int dRw) throws Exception
 		vehicleName=vehicleName1[1].toUpperCase();
 		
 		libs.clickOnButton(PGO_landing_page.slct_lnkText(driver), "Choose Vehicle");
-		
 		Thread.sleep(3000);
 		PGO_landing_page.txt_locationCd(driver).clear();
 		libs.enterValueIntoTextField(PGO_landing_page.txt_locationCd(driver), "zip code", locationCd);
 		
 		libs.clickOnButton(PGO_landing_page.btn_continue(driver), "serch vechile/continue");
 		test.log(LogStatus.PASS, "Application navigated to Showroom Page Successfully" );
-		Thread.sleep(5000);
-		libs.clickOnButton(PGO_landing_page.btn_PreviousYear(driver), "Previous Year");
-		Thread.sleep(1000);
+		Thread.sleep(3000);
 		libs.clickOnButton(PGO_landing_page.slct_text(driver, vehicleName), vehicleName);
 		test.log(LogStatus.PASS, "Application navigated to Search Inventory Page Successfully" );
 

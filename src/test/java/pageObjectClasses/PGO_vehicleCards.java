@@ -24,7 +24,7 @@ public class PGO_vehicleCards extends FuncitonLibrary
 			element = driver.findElement(By.xpath("//div[@class ='col-sm-4 saved-vehicles-card add-vehicle']//div[@class='card-content']"));
 			libs.HighlightElement(driver, element);
 				}catch(Exception e){
-
+//					test.log(LogStatus.FAIL,"Missing object name  and method name ", new Exception().getStackTrace()[0].getMethodName()+":"+new Exception().getStackTrace()[1].getMethodName());
 					System.out.println("vehIconno is not there in "+ new Exception().getStackTrace()[0].getMethodName());
      	}
 	return element;
@@ -279,46 +279,8 @@ public class PGO_vehicleCards extends FuncitonLibrary
 			element = driver.findElement(By.xpath("//button[@class='close']"));
 			libs.HighlightElement(driver, element);
 	 }catch(Exception e){
-
+//    	 test.log(LogStatus.FAIL,"Missing object name  and method name ", new Exception().getStackTrace()[0].getMethodName()+":"+new Exception().getStackTrace()[1].getMethodName());
      		System.out.println("vehIconno is not there in "+ new Exception().getStackTrace()[0].getMethodName());
-     	}
-	return element;
-	
-	}
-	public static WebElement delete_deal_btn_Yes (WebDriver driver)
-	{
-		try{
-			element = driver.findElement(By.xpath("//div[@class='modal-footer']//button[@class = 'btn btn-primary']"));
-			libs.HighlightElement(driver, element);
-	 }catch(Exception e){
-
-     		System.out.println("delete_deal_btn_Yes");
-     	}
-	return element;
-	
-	}
-	
-	public static WebElement txt_DealSubmittedDetails(WebDriver driver, int position)
-	{
-		try{
-			element = driver.findElement(By.xpath("(//aside[contains(@class, 'notification')])[position()="+position+"]"));
-			libs.HighlightElement(driver, element);
-	 }catch(Exception e){
-
-     		System.out.println("txt_DealSubmittedDetails");
-     	}
-	return element;
-	
-	}
-	
-	public static WebElement lnk_ReturnToInventory(WebDriver driver)
-	{
-		try{
-			element = driver.findElement(By.xpath("//a[@class = 'logo']"));
-			libs.HighlightElement(driver, element);
-	 }catch(Exception e){
-
-     		System.out.println("lnk_ReturnToInventory");
      	}
 	return element;
 	

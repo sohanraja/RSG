@@ -294,7 +294,7 @@ public class PGO_questionsTab {
 		}
 		catch(Exception e)
 		{
-			System.out.println("txt_faqhdngDtl");
+			System.out.println("Question_tatalqs");
 		}
 		return element1;
 		

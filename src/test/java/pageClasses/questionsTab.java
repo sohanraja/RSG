@@ -1,4 +1,5 @@
 package pageClasses;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import utilityClasses.*;
+
 public class questionsTab extends rsg_DriverClass{
 
 	FuncitonLibrary libs = new FuncitonLibrary();
@@ -24,10 +26,9 @@ public class questionsTab extends rsg_DriverClass{
 
 	public void quesTabVal_run(int dRw) throws Exception
 	{
-		try
-		{
 		String runVal = data.getExcelData(dRw,"Questions", "Testcases");
-			
+		System.out.println(runVal);
+		
 				switch(runVal){
 				case "Yes":
 					invokeReport("Verify questionsTab",dRw);
@@ -35,25 +36,15 @@ public class questionsTab extends rsg_DriverClass{
 					quesTabMap(dRw);
 					quesTabFaqs(dRw);
 					tearReport();
-					test.log(LogStatus.PASS, "Questions testcase executed successfully");
-					data.writeExceldata(dRw, "Result", "Questions tab", "Passed");
-					break;
+					
+				break;
 				case "No":
-					  data.writeExceldata(dRw, "Result", "Questions tab", "Not Executed");
+					System.out.println("'Questions Tab' testcase is not Executed.");
+					data.writeToExcel("Not Executed",dRw, 2, SheetNum);
 				break;
 				}	
 	}
-	catch(Exception quesTabVal_run)
-	{
-		Count++;
-		String scrnshtPthNm=scrnshtPth+"Vehicle_details_tab_"+".jpg";
-		data.writeExceldata(dRw,"Result","Questions tab","Failed");
-		test.log(LogStatus.FAIL,"Questions tab details testcase is failed");
-		getscrnSht.getscreenshot(driver,scrnshtPthNm );
-        test.log(LogStatus.FAIL, quesTabVal_run.getMessage(), test.addScreenCapture(Screenpathforreport(scrnshtPthNm)));
-        tearReport();
-	}
-	}
+
 
 	public void quesTabAdd(int dRw)throws Exception {
 

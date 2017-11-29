@@ -1,13 +1,27 @@
 package pageClasses;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+import com.google.common.base.Verify;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import libraryClasses.FuncitonLibrary;
 import pageClasses.rsg_DriverClass;
 import pageObjectClasses.PGO_VehicleDetails;
+import utilityClasses.ExcelUtilityClass;
+import utilityClasses.ScreenShot;
+import utilityClasses.ExtentReportManager;
 public class VehicleDetails extends rsg_DriverClass
 {
+
   JavascriptExecutor jse = (JavascriptExecutor)driver;
   Actions action=new Actions(driver);
   int sheetno=9;
@@ -17,33 +31,40 @@ public class VehicleDetails extends rsg_DriverClass
 	    try
 	    {
 	    String runVal = data.getExcelData(dRw, "Vehicle Details", "Testcases");
-	    invokeReport("Verify Vehicle Details tab",dRw);
-	    test.log(LogStatus.INFO, "Verify Vehicle Details Page ","Vehicle Details Page loads successfully");
+	    invokeReport("Verify vehicle details tab",dRw);
 		switch(runVal)
 		{
 		case "Yes":
-			if(ValidationStatus.equalsIgnoreCase("Yes"))
-			{
+			
+			if(ValidationStatus.equalsIgnoreCase("Yes")){
 				AllvalidationForVechicleDetailspage(dRw);
-			    mvToKBBTrade();
+			 mvToKBBTrade();
 			}
 			else
 			{
-			    mvToKBBTrade();
-			    test.log(LogStatus.INFO,"Vehicle Details test case is Passed");
-		        data.writeExceldata(dRw,"Result","Vehicle Details","Passed");
+				
+			 
+//				AllvalidationForVechicleDetailspage(dRw);
+			
+			 mvToKBBTrade();
+			 test.log(LogStatus.PASS,"Vehicle details testcase is Passed");
+		     data.writeExceldata(dRw,"Result","Vehicle Details","Passed");
+
 			}
 			break;
 		case "No":
+
 			mvToKBBTrade();
-			test.log(LogStatus.INFO,"Vehicle Details testcase will not be executed");
+			test.log(LogStatus.INFO,"Vehicle details testcase will not be executed");
 			data.writeExceldata(dRw,"Result","Vehicle Details","Not Executed");
+
 			break;
 		}
 	     tearReport();
 	}
 	catch(Exception VehicledetailsTab)
 	{
+
 		Count++;
 		String scrnshtPthNm=scrnshtPth+"Vehicle_details_tab_"+".jpg";
 		data.writeExceldata(dRw,"Result","Vehicle Details","Failed");
@@ -56,66 +77,49 @@ public class VehicleDetails extends rsg_DriverClass
   
   public void  AllvalidationForVechicleDetailspage(int dRw) throws Exception
   {
-	try
-	{ 
-	  String Expected_Pricing_Summary_Heading=data.getExcelData(1, "Expected Pricing Summary Heading", "Vehicle Details");
-	  bottomtext=data.getExcelData(1, "Bottom_Text", "Vehicle Details");
+	 try{ String Expected_Pricing_Summary_Heading=data.getExcelData(1, "Expected Pricing Summary Heading", "Vehicle Details");
+	  String bottomtext=data.getExcelData(1, "Bottom_Text", "Vehicle Details");
 	  String Zipcodeerrormsg=data.getExcelData(1, "Zipcode_Msg", "Vehicle Details");
 	  String inValidZipcode=data.getExcelData(1, "ZipCode_Invalid", "Vehicle Details");
 	  SimpleDateFormat formatter = new SimpleDateFormat("MMM dd, YYYY");
 	  bottomtext=bottomtext.replaceAll("Date", formatter.format(date));
+	  String yourestimatedtaxtxt=data.getExcelData(1, "Estimated Pre Tax Price Inline Text", "Vehicle Details");
 	  String Kelly_Blue_txt=data.getExcelData(1, "Kelly_Blue_txt", "Vehicle Details");
 	  String Price_Pledge_Heading=data.getExcelData(1, "Price Pledge Heading", "Vehicle Details");
 	  String Price_Pledge=data.getExcelData(1, "Price Pledge", "Vehicle Details");
 	  String locationCd = data.getExcelData(1, "Dealer Code", "SearchVehicle");
 	  libs.GlobalHeadingBar();
-	  
-	  libs.componenttHeading("Delete Deal");
 	  DeleteDeal(dRw);
-	  
-	  libs.componenttHeading("Delear Map");
 	  delearMap();
 	  libs.tabList("Vehicle Details Page");
-	  
-	  libs.componenttHeading("Pricing Summary");
 	  pricingSummary(dRw);
-	  test.log(LogStatus.INFO, "Pricing Summary details data has written into excel sheet" );
-	  
-	  libs.componenttHeading("Your Vehicle Text Verification");
-	  libs.VerifyText(PGO_VehicleDetails.txt_YourVechicleHeading0(driver), data.getExcelData(1, "txt_YourVechicleHeading0", "Vehicle Details"), "txt_YourVechicleHeading","");
-	  libs.VerifyPartialText(PGO_VehicleDetails.txt_YourVechicleHeading1(driver), data.getExcelData(1, "txt_YourVechicleHeading0", "Vehicle Details"), "txt_YourVechicleHeading","");
-	  libs.VerifyText(PGO_VehicleDetails.txt_YourVechicleHeading2(driver), data.getExcelData(1, "txt_YourVechicleHeading0", "Vehicle Details"), "txt_YourVechicleHeading","");
+	  priceCal(dRw);
+	  libs.VerifyText(PGO_VehicleDetails.txt_YourVechicleHeading(driver), data.getExcelData(1, "txt_YourVechicleHeading", "Vehicle Details"), "txt_YourVechicleHeading", "");
 	  yourVehicleTabReading(dRw);
-	  test.log(LogStatus.INFO, "Section vinDetails data has written into excel sheet" );
-	  
-	  libs.componenttHeading("View window sticker");
 	  ViewStickbar(dRw);
 	
-
-	  libs.componenttHeading("Zipcode Verification");
+//	  libs.Iballs("Engine");
+//	  libs.Iballs("EcoBoost");
+	  // In valid Zip Code
 	  libs.enterValueIntoTextField(PGO_VehicleDetails.txt_Zipcode(driver), "txt_Zipcode", inValidZipcode);
 	  Thread.sleep(3000);
 	  libs.VerifyText(PGO_VehicleDetails.error_Zipcode(driver), Zipcodeerrormsg, "error_Zipcode", "");
 	  libs.enterValueIntoTextField(PGO_VehicleDetails.txt_Zipcode(driver), "txt_Zipcode", locationCd);
 	  // your pricing summary
-	  libs.componenttHeading("Price and Estimated Pre-Tax price text verification");
 	  libs.VerifyText(PGO_VehicleDetails.txt_YourPricingSummary(driver), Expected_Pricing_Summary_Heading, "txt_YourPricingSummary", "");
-	  libs.VerifyText(PGO_VehicleDetails.txt_YourEstimatedPretax(driver), data.getExcelData(1, "Estimated Pre Tax Price Inline Text", "Vehicle Details"), "txt_YourEstimatedPretax", "");
+	  libs.VerifyText(PGO_VehicleDetails.txt_YourEstimatedPretax(driver), yourestimatedtaxtxt, "txt_YourEstimatedPretax", "");
 	  //kelley blue
-	  libs.componenttHeading("Kelly Blue Book Widget");
 	  libs.IMGValidation(PGO_VehicleDetails.img_KellyBlue(driver), "Verify the Kelly blue image", "Kelly blue image has been displayed", "img_KellyBlue");
 	  libs.VerifyText(PGO_VehicleDetails.txt_KellyBlue(driver), Kelly_Blue_txt, "txt_KellyBlue", "");
-	  kellyBlueBook(dRw);
-	  //our Pledge
-	  libs.componenttHeading("Pricing Pledge Verification");
-	  libs.IMGValidation(PGO_VehicleDetails.img_ourpledge(driver), "Verify Pledge image", "Our Pledge image has been displayed", "img_ourpledge");
-	  libs.VerifyText(PGO_VehicleDetails.txt_ourpledge_Heading(driver), Price_Pledge_Heading, "txt_ourpledge_Heading", "");
-	  libs.VerifyText(PGO_VehicleDetails.txt_ourpledge_Desc(driver), Price_Pledge, "txt_ourpledge_Desc", "");
+	  //our pladge
+	  libs.IMGValidation(PGO_VehicleDetails.img_ourpladge(driver), "Verify our pladge image", "Our pladge image has been displayed", "img_ourpladge");
+	  libs.VerifyText(PGO_VehicleDetails.txt_ourpladge_Heading(driver), Price_Pledge_Heading, "txt_ourpladge_Heading", "");
+	  libs.VerifyText(PGO_VehicleDetails.txt_ourpladge_Desc(driver), Price_Pledge, "txt_ourpladge_Desc", "");
 	  //bottom text
-	  libs.componenttHeading("Bottom text Verification");
 	  libs.VerifyText(PGO_VehicleDetails.txt_BottomText(driver), bottomtext, "txt_BottomText", "");
 	  comparePrice();
 	  libs.Pagedisclaimers("Vehicle Details",10);
+	  kellyBlueBook(dRw);
 	  libs.Disclosers();
 	  libs.GlobalBottomBar();
 	  
@@ -133,7 +137,7 @@ public class VehicleDetails extends rsg_DriverClass
 	  try
 	  {
 	  String exptitle=data.getExcelData(dRw, "Expected Pricing Summary Heading", "Vehicle Details");
-	  //libs.VerifyText(PGO_VehicleDetails.pricingSummary(driver), exptitle,"Pricing Summary Heading","");
+	  libs.VerifyText(PGO_VehicleDetails.pricingSummary(driver), exptitle,"Pricing Summary Heading","");
 	  libs.clickOnButton(PGO_VehicleDetails.dreicon(driver), "dreicon");
 	  test.log(LogStatus.PASS, "Total MSRP dre icon clicked and expanded successfully" );
 	  int ele=PGO_VehicleDetails.msrpElements1(driver,dRw).size();
@@ -178,7 +182,7 @@ public class VehicleDetails extends rsg_DriverClass
 	  int diffmsrp2=libs.stringToInt(data.getExcelData(dRw,"DifferencefromTotalMSRP","Vehicle Details"));
 	  int dealprice2=libs.stringToInt(data.getExcelData(dRw,"DealerSellingPrice","Vehicle Details"));
 	  int diff=totalmsrp2-dealprice2;
-	  if(diffmsrp2!=diff)
+	  if(diffmsrp2==diff)
 
 	  {
 		test.log(LogStatus.PASS, "Difference from total MSRP is difference between the Total MSRP and dealer selling price" );
@@ -188,7 +192,7 @@ public class VehicleDetails extends rsg_DriverClass
 		  getscrnSht.getscreenshot(driver, scrnshtPthNm);
 		  test.log(LogStatus.FAIL, "Difference from total MSRP is not the difference between Total MSRP and dealer selling price",test.addScreenCapture(Screenpathforreport(scrnshtPthNm)));  
 	  }
-	  int avalin2=libs.stringToInt(data.getExcelData(dRw,"CurrentAvailableIncentives","Vehicle Details"));
+	  int avalin2=libs.stringToInt(data.getExcelData(dRw,"AvailableIncentives","Vehicle Details"));
 	  if(avalin2==0)
 	  {
 		  test.log(LogStatus.INFO,"There are currently no incentives available for the vehicle");
@@ -219,13 +223,13 @@ public class VehicleDetails extends rsg_DriverClass
 
   public void kellyBlueBook(int dRw) throws Exception
   { 
-
+//	  String scrnshtPth = data.getStrExcelData(dRw, 1, sheetno);
 	  String scrnshtPthNm=scrnshtPth+"Vehicle_details_tab_"+".jpg";
 	  try
 	  {
 	  libs.VerifyElement(PGO_VehicleDetails.kellyblue(driver),"Kelly Blue Book Image",driver,test, dRw);
 	  libs.VerifyElement(PGO_VehicleDetails.kellyblueBookButton(driver),"Kelly Blue Book Image",driver,test, dRw);
-	  libs.clickOnButton(PGO_VehicleDetails.kellyblueBookButton(driver),"kellyblueBookButton");
+	  PGO_VehicleDetails.kellyblueBookButton(driver).click();
 	  test.log(LogStatus.PASS, "Kelly blue book button clicked successfully" );
 	  int elems=PGO_VehicleDetails.kellyblueTitle(driver).size();
 	  test.log(LogStatus.INFO,"Vehicle model details inside Kelly blue book : ");
@@ -273,7 +277,7 @@ public class VehicleDetails extends rsg_DriverClass
 		 String vehlabel= PGO_VehicleDetails.txt_yourVechicleLabel(driver,dRw).get(i).getText();
 		 String vehdet=PGO_VehicleDetails.txt_yourVechicleValue(driver,dRw).get(i).getText();
 		 test.log(LogStatus.INFO,vehlabel+" "+'-'+" "+vehdet);
-
+//		 MyString.replaceAll("[^0-9 ]", "");
 		 System.out.println("column name  "+vehlabel.replaceAll("[^A-Za-z]", "").trim()+" value:"+vehdet);
 		 data.writeExceldata(dRw,vehlabel.replaceAll("[^A-Za-z]", "").trim(), "Vehicle Details",vehdet);
 	  }
@@ -316,9 +320,8 @@ public class VehicleDetails extends rsg_DriverClass
   public void delearMap() throws Exception
   {
 	  libs.clickOnButton(PGO_VehicleDetails.lnk_Mapview(driver), "lnk_Mapview");
-	  test.log(LogStatus.PASS, "Click on Delear Location Map ", "Dealer Location Map Opened");
+	  test.log(LogStatus.INFO, "Click on Delear Map ", "delear Map has been opended");
 	  libs.clickOnButton(PGO_VehicleDetails.lnk_Mapview_Close(driver), "lnk_Mapview_Close"); 
-	  test.log(LogStatus.PASS, "Close Dealer Location map ", "Dealer Location Map Closed");
   }
   public void mvToKBBTrade() throws Exception
 	{

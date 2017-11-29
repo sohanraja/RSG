@@ -19,7 +19,6 @@ import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 import libraryClasses.FuncitonLibrary;
 
 public class ExcelUtilityClass extends FuncitonLibrary {
@@ -102,7 +101,6 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
 		XSSFSheet ws1 = wb1.getSheet(sheetName.trim());
-	
 		Row row1 = ws1.getRow(0);
 		
 		for (Cell cell : row1) {
@@ -125,7 +123,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 	public void writeExceldata(int RowNum,String ColName,String sheetName,String value) throws IOException{
 		try{ 
 			String CellData=null;
-
+//			value=value.replaceAll("\\s+","");
 		File file =  new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
 		FileInputStream fis = new FileInputStream(file);
 		XSSFWorkbook wb1 = new XSSFWorkbook(fis);
@@ -156,7 +154,7 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 	    return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 	}
 	
-	public boolean addColumn(String colName,String sheetName){
+public boolean addColumn(String colName,String sheetName){
 		
 		try{
 			File file =  new File(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\TestData"+applicationname+".xlsx");
@@ -166,7 +164,8 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 			Row row1 = ws1.getRow(0);
 			Cell cell;
 			
-
+//			fis = new FileInputStream(path); 
+//			workbook = new XSSFWorkbook(fis);
 			int index = wb1.getSheetIndex(sheetName);
 			if(index==-1)
 				return false;
@@ -192,7 +191,11 @@ public class ExcelUtilityClass extends FuncitonLibrary {
 	        FileOutputStream outFile =new FileOutputStream(file);
 		    wb1.write(outFile);
 		    outFile.close();
-		    
+//	        
+//	        
+//	        fileOut = new FileOutputStream(path);
+//			workbook.write(fileOut);
+//		    fileOut.close();		    
 
 		}catch(Exception e){
 			System.out.println("excel column creating problem");

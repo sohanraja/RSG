@@ -12,7 +12,11 @@ import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import utilityClasses.*;
 public class signIn extends rsg_DriverClass{
-
+//	WebDriver driver = getDriver();
+//	ExcelUtilityClass data = new ExcelUtilityClass();
+//	ScreenShot getscrnSht = new ScreenShot();
+//	ExtentReports report;
+//	ExtentTest test;
 	WebDriverWait wait = new WebDriverWait(driver,6);
 	FuncitonLibrary libs = new FuncitonLibrary();
 	Actions actions = new Actions(driver);
@@ -35,7 +39,9 @@ public class signIn extends rsg_DriverClass{
 			invokeReport();
 			nvgtSignIn(dRw);
 			entrSignIn(dRw);
-
+//			signinVerifications(dRw);
+//			RgstrSignInVldTxt(dRw);
+//			tearReport();
 			break;
 		case "No":
 			System.out.println("SignIn testcase will not be executed");

@@ -17,6 +17,7 @@ public class ExtentReportManager {
 	    report
 	    .addSystemInfo("Report Name", "TestReport")
 	    .addSystemInfo("Report Type", "Automation Report");
+//	    report.config().documentTitle("Sample ExtentReports report");
 		return report;
 	}
 

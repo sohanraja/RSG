@@ -1069,14 +1069,6 @@ public class PGO_kbbTradeIn extends FuncitonLibrary {
 					System.out.println("kbbEnterOwnValueTxtBox");
 					}return element;
 			}
-			public static WebElement kbbEnterOwnValueTxtArea(WebDriver driver)
-			{
-				try{element = driver.findElement(By.xpath("//textarea[@class='ng-pristine ng-valid']"));
-				libs.HighlightElement(driver, element); 
-				}catch(Exception e){		
-					System.out.println("kbbEnterOwnValueTxtArea");
-					}return element;
-			}
 			public static WebElement kbbSummaryPageImg(WebDriver driver)
 			{
 				
@@ -1116,22 +1108,6 @@ public class PGO_kbbTradeIn extends FuncitonLibrary {
 				libs.HighlightElement(driver, element); 
 				}catch(Exception e){		
 					System.out.println("kbbSummaryPageconditionValue");
-					}return element;
-			}
-			public static WebElement kbbSummaryPageentervalheading(WebDriver driver)
-			{
-				try{element = driver.findElement(By.xpath("//h3[@class='clearfix']//div[@class='col-md-9 col-sm-12 text-left']"));
-				libs.HighlightElement(driver, element); 
-				}catch(Exception e){		
-					System.out.println("kbbSummaryPageentervalheading");
-					}return element;
-			}
-			public static WebElement kbbSummaryPageenterval(WebDriver driver)
-			{
-				try{element = driver.findElement(By.xpath("//h3[@class='clearfix']//div[@class='col-md-3 col-sm-12 text-right ng-binding']"));
-				libs.HighlightElement(driver, element); 
-				}catch(Exception e){		
-					System.out.println("kbbSummaryPageenterval");
 					}return element;
 			}
 			public static WebElement kbbResponseTotalTxt(WebDriver driver)
@@ -1176,7 +1152,6 @@ public class PGO_kbbTradeIn extends FuncitonLibrary {
 					System.out.println("link_Delete");
 					}return element;
 			}
-			
 			
 			
 }

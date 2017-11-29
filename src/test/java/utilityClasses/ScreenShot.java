@@ -26,7 +26,28 @@ public class ScreenShot  {
             FileUtils.copyFile(scrFile, new File(Path));
             
             
-
+//            Toolkit toolkit = Toolkit.getDefaultToolkit();
+//            Dimension screenSize = toolkit.getScreenSize();
+//            Rectangle rectangle = new Rectangle(0, 0, screenSize.width, screenSize.height);
+//            Robot robot = null;
+//    try
+//        {
+//            robot = new Robot();
+//            } catch (AWTException e) {
+//          e.printStackTrace();
+//
+//            }
+//       
+//       BufferedImage screenshotImage = robot.createScreenCapture(rectangle);
+//    File screenshotFile = new File(Path);
+//   try
+//       {
+//           ImageIO.write(screenshotImage, "jpg", screenshotFile);
+//            				
+//         } catch (IOException e) {
+//           e.printStackTrace();
+//
+//            /*     */     }
     }
 
 }
