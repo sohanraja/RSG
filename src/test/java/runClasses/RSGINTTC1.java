@@ -28,8 +28,8 @@ public class RSGINTTC1 extends rsg_DriverClass{
 		
 		
 		System.out.println("row count : "+dtaRwCnt);
-//		String scrnshtPth = data.getStrExcelData(1, 5, 2);
-		scrnshtPth = System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\Screenshots\\";
+/		String scrnshtPth = data.getStrExcelData(1, 5, 2);
+		scrnshtPth = System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/Screenshots/";
 		System.out.println(dtaRwCnt);
 		for(int dRw=14; dRw<=19;dRw++){
 			try{
@@ -39,58 +39,58 @@ public class RSGINTTC1 extends rsg_DriverClass{
 				ValidationStatus=data.getExcelData(dRw, "ValidationStatus", "Testcases");
 				System.out.println("test case iteration : "+dRw);
 				
-//				//sign-in
-//				signIn sign=new signIn();
-//				sign.SignIn_run(dRw);
+/				/sign-in
+/				signIn sign=new signIn();
+/				sign.SignIn_run(dRw);
 				
-////				//		Landing Page
+//				/		Landing Page
 				landing_Page lp = new landing_Page();
 				lp.hwItWrks_run(dRw);
-//
-				//Chat Window
+/
+				/Chat Window
 				chat chat = new chat();
 				chat.chatWinVal_run(dRw);
 
-				//Questions Window
+				/Questions Window
 				questionsTab qTab = new questionsTab();
 				qTab.quesTabVal_run(dRw);
-//
+/
 
-				// 		Vehicle Flyout
+				/ 		Vehicle Flyout
 				libs.UnexpectedPopup();
 				vehicleFlyout vfo =new vehicleFlyout();
 				vfo.vehFlyOut_run(dRw);	
 
-//										Vehicle Cards
+/										Vehicle Cards
 				libs.UnexpectedPopup();
 				vehicleCards vCards = new vehicleCards();
 			vCards.vhclCrds_run(dRw);
 
-//				//		Vehicle Details
+/				/		Vehicle Details
 			libs.UnexpectedPopup();
 				VehicleDetails vehDtls = new VehicleDetails();
 				vehDtls.gtVehicleDtls_run(dRw);
-////
-////				// 		KBB trade in 
+//
+//				/ 		KBB trade in 
 				libs.UnexpectedPopup();
 				kbbTradeIn kbb =new kbbTradeIn();
 				kbb.KbbTrdIn_run(dRw);
-////
-////				//		Payment Calculator
+//
+//				/		Payment Calculator
 				libs.UnexpectedPopup();
 				PaymentCalculator pmntCal = new PaymentCalculator();
 				pmntCal.PaymentCalculator_run(dRw);
-////
-////				// 		Review and send
+//
+//				/ 		Review and send
 				libs.UnexpectedPopup();
 				reviewAndSend revSend =new reviewAndSend();
 				revSend.reviewAndSend_run(dRw);
-////
-////				// 		Credit form 	
+//
+//				/ 		Credit form 	
 				creditForm CreForm=new creditForm();
 				CreForm.creditForm_run(dRw);
-////
-////				//		Credit App
+//
+//				/		Credit App
 			creditApp CreApp=new creditApp();
 				CreApp.creditApp_run(dRw);
 
@@ -106,13 +106,13 @@ public class RSGINTTC1 extends rsg_DriverClass{
 			libs.invokeReportTestSernarios(testsenarioname,testSenarioDesc);
 			closeDriver();
 			Brosweropen(browser_val);
-//			if(data.getExcelData(dRw+1, "Execution", "Testcases").equalsIgnoreCase("No")) {
-//				dRw=dtaRwCnt+1;
-//			}
+/			if(data.getExcelData(dRw+1, "Execution", "Testcases").equalsIgnoreCase("No")) {
+/				dRw=dtaRwCnt+1;
+/			}
 		}
 		
-//		tearReport();
-//		testSenariostearsReport();
+/		tearReport();
+/		testSenariostearsReport();
 	}
 
 }

@@ -32,7 +32,7 @@ public class CTPINTTC1 extends rsg_DriverClass{
 		
 		System.out.println("row count : "+dtaRwCnt);
 //		String scrnshtPth = data.getStrExcelData(1, 5, 2);
-		scrnshtPth = System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\Screenshots\\";
+		scrnshtPth = System.getProperty("user.dir")+"/Reports/"+applicationname+"/"+datestamp()+"/Screenshots/";
 		System.out.println(dtaRwCnt);
 		for(int dRw=16; dRw<=16;dRw++){
 			try{
