@@ -27,10 +27,10 @@ public class RSGQATC1 extends rsg_DriverClass{
 		int dtaRwCnt = data.getRowCount(1);
 		actions = new Actions(driver);
 //		ScriptVideoRecord scriptVideoRecord=ScriptVideoRecord.getInstance();
-//		scriptVideoRecord.startRecording(System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+libs.datestamp(), this.getClass().getName());
+//		scriptVideoRecord.startRecording(System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+libs.datestamp(), this.getClass().getName());
 		System.out.println("row count : "+dtaRwCnt);
 //		String scrnshtPth = data.getStrExcelData(1, 5, 2);
-		scrnshtPth = System.getProperty("user.dir")+"\\Reports\\"+applicationname+"\\"+datestamp()+"\\Screenshots\\";
+		scrnshtPth = System.getProperty("user.dir")+"//Reports//"+applicationname+"//"+datestamp()+"//Screenshots//";
 		System.out.println(dtaRwCnt);
 		 File dir = new File(scrnshtPth);
 			dir.mkdirs();
